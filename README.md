@@ -261,3 +261,40 @@ The repository currently contains 125 advanced projects and 20 foundational impl
 > **The objective is not to collect techniques.**
 >
 > **The objective is to understand the systems those techniques operate against.**
+After nearly three years of research across multiple areas of cybersecurity, involving technical papers, research articles, journals, reviews, and practical experimentation, I have compiled these 140 cybersecurity project ideas with carefully considered development timelines.
+
+I believe this collection is sufficient to build a serious cybersecurity portfolio and, more importantly, to develop the practical depth required to pursue a professional career in cybersecurity. However, I want to make one point absolutely clear: these projects are not designed to make anyone look skilled on paper. They are designed to make you actually skilled.
+
+I personally attempted to work through these projects, and I failed more than 20 times across different projects. Those failures were not wasted time. They forced me to understand why systems behave the way they do, where security assumptions break, how attacks actually work, and how an attacker thinks when there is no convenient tutorial telling you what to do next.
+
+In the current AI era, almost everything can be made to look easy. A model can generate code, explain an exploit, design an architecture, troubleshoot an error, or provide a seemingly complete solution within seconds. That convenience is useful, but it can also destroy the learning process if you depend on it too early.
+
+My strongest recommendation is simple: build these projects without AI assistance until you have genuinely struggled with them.
+
+Read the documentation. Study the papers. Break your own implementations. Debug your own mistakes. Build something that fails. Find out why it failed. Rebuild it. Repeat.
+
+That process is where cybersecurity is actually learned.
+
+If AI gives you the answer before you have developed the ability to find the answer yourself, you are not learning cybersecurity. You are learning how to operate an AI tool.
+
+I am not claiming that I completely avoided AI. I used a small amount of AI assistance to fine-tune and improve the written material. But when it came to actually building and understanding the projects, I deliberately tried to detach myself from AI as much as possible. The objective was not to produce impressive-looking repositories. The objective was to develop understanding through implementation, failure, debugging, and repetition.
+
+These projects are therefore not intended for script kiddies, copy-paste learners, or people looking for a shortcut into cybersecurity. They are intended for people who are genuinely serious about understanding the field and building a future in it.
+
+Cybersecurity is not learned by collecting tools, running commands, copying exploits, or completing a list of tutorials. It is learned by understanding systems deeply enough to know where they fail—and by developing the ability to discover those failures yourself.
+
+I am Hardik Roy, an engineering student with a strong interest in cybersecurity. I have spent a significant amount of my time researching, experimenting, failing, rebuilding, and trying to understand this field from multiple perspectives. I created this collection because I believe serious learners should have access to challenging project directions instead of another collection of basic, repetitive cybersecurity tutorials.
+
+If you are serious about cybersecurity, do not treat these 140 projects as a checklist.
+
+Treat them as problems.
+
+Build them. Break them. Fail at them. Fix them.
+
+And most importantly, understand why they work.
+
+Because eventually, in a real security environment, nobody will hand you a tutorial.
+
+You will be given a system, a problem, incomplete information, and a deadline.
+
+Your ability to figure out what happens next is what makes you a cybersecurity professional.
