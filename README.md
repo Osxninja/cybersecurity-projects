@@ -1,28 +1,25 @@
-## 🗺️ Research Landscape
+## Research Landscape
 
 <div align="center">
 
-<p>
-<em>
-The map below represents how the research evolved — from foundational security concepts
-to increasingly specialized areas of systems, offensive security, AI, and digital forensics.
-</em>
-</p>
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:050505,35:0b0f0e,70:003b2f,100:00ff9d&height=180&section=header&text=HIDDEN%20RESEARCH&fontSize=46&fontColor=00ff9d&animation=twinkling&fontAlignY=42&desc=CYBERSECURITY%20RESEARCH%20ARCHIVE&descSize=14&descColor=8b949e&descAlignY=64" width="100%" alt="Hidden Research banner"/>
 
 <br>
 
-<img src="https://svg-banners.vercel.app/api?type=glitch&text=CYBERSECURITY%20RESEARCH%20LANDSCAPE&width=1100&height=90" width="100%" alt="Cybersecurity Research Landscape"/>
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&duration=2800&pause=1000&color=00FF9D&center=true&vCenter=true&width=850&lines=SYSTEMS+%7C+NETWORKS+%7C+APPLICATIONS+%7C+INTELLIGENCE+%7C+AI;RESEARCHING+THE+LAYERS+THAT+SECURITY+USUALLY+HIDES;FOUNDATION+%E2%86%92+EXPERIMENTATION+%E2%86%92+ANALYSIS+%E2%86%92+RESEARCH" alt="Research animation"/>
 
-<br><br>
+</div>
 
-<table>
+---
+
+### Research Domains
+
+<table align="center">
 <tr>
 
 <td align="center" width="20%">
 
-### 🕸️
-
-**WEB SECURITY**
+**01 — WEB SECURITY**
 
 Application Security
 API Security
@@ -34,12 +31,10 @@ Security Controls
 
 <td align="center" width="20%">
 
-### 🌐
-
-**NETWORK SECURITY**
+**02 — NETWORK SECURITY**
 
 Reconnaissance
-Protocols
+Protocol Security
 Enterprise Networks
 Traffic Analysis
 Detection
@@ -48,37 +43,31 @@ Detection
 
 <td align="center" width="20%">
 
-### 🦠
-
-**MALWARE & RE**
+**03 — MALWARE & RE**
 
 Malware Analysis
 Reverse Engineering
 Binary Analysis
-Behavioral Research
+Behavioural Research
 Detection
 
 </td>
 
 <td align="center" width="20%">
 
-### 📡
-
-**IoT & EMBEDDED**
+**04 — IoT & EMBEDDED**
 
 Firmware
 Wireless Protocols
 CAN / MQTT / BLE
 ICS / SCADA
-Hardware Research
+Hardware Security
 
 </td>
 
 <td align="center" width="20%">
 
-### ☁️
-
-**CLOUD SECURITY**
+**05 — CLOUD SECURITY**
 
 AWS / Azure / GCP
 IAM
@@ -95,17 +84,9 @@ DevSecOps
 
 <br>
 
-`────────────────────────────────────────────────────────────────────────`
+`FOUNDATIONS ── APPLICATION ── SPECIALIZATION ── ADVANCED RESEARCH`
 
-<br>
-
-**FOUNDATIONS → APPLIED SECURITY → SPECIALIZED RESEARCH → ADVANCED EXPERIMENTATION**
-
-<br>
-
-`────────────────────────────────────────────────────────────────────────`
-
-<br>
+<br><br>
 
 </td>
 </tr>
@@ -114,23 +95,19 @@ DevSecOps
 
 <td align="center">
 
-### 🎭
-
-**HUMAN SECURITY**
+**06 — HUMAN SECURITY**
 
 OSINT
 Phishing Research
 Social Engineering
-Awareness
+Security Awareness
 Synthetic Media
 
 </td>
 
 <td align="center">
 
-### 🔐
-
-**CRYPTOGRAPHY**
+**07 — CRYPTOGRAPHY**
 
 Modern Cryptography
 Post-Quantum
@@ -142,9 +119,7 @@ Steganography
 
 <td align="center">
 
-### 📱
-
-**MOBILE SECURITY**
+**08 — MOBILE SECURITY**
 
 Android
 iOS
@@ -156,9 +131,7 @@ Application Security
 
 <td align="center">
 
-### 🤖
-
-**AI SECURITY**
+**09 — AI SECURITY**
 
 Adversarial ML
 LLM Security
@@ -170,9 +143,7 @@ Security Automation
 
 <td align="center">
 
-### 🔍
-
-**DFIR**
+**10 — DFIR**
 
 Disk Forensics
 Memory Analysis
@@ -185,54 +156,108 @@ Evidence Analysis
 </tr>
 </table>
 
-<br>
+---
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=15&duration=3500&pause=1200&color=00FF9D&center=true&vCenter=true&width=850&lines=FOUNDATIONS+%E2%86%92+EXPERIMENTATION+%E2%86%92+RESEARCH+%E2%86%92+UNDERSTANDING;145+PROJECTS+%C2%B7+10+DOMAINS+%C2%B7+3+YEARS+OF+WORK" alt="Research progression"/>
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=400&size=13&duration=3000&pause=900&color=8B949E&center=true&vCenter=true&width=760&lines=THE+ATTACK+SURFACE+IS+LARGER+THAN+THE+APPLICATION;THE+SYSTEM+IS+LARGER+THAN+THE+ATTACK+SURFACE;UNDERSTANDING+THE+SYSTEM+IS+THE+REAL+WORK" alt="Research statement"/>
 
 </div>
 
-### How the research connects
+---
 
-The domains are not isolated projects. They overlap.
+### How the Research Connects
+
+The ten domains are not independent subjects.
+
+They intersect through systems, networks, applications, human behaviour, computation, and evidence.
 
 ```text
-                         CYBERSECURITY
-                              │
-             ┌────────────────┼────────────────┐
-             │                │                │
-          SYSTEMS          NETWORKS          HUMAN
-             │                │                │
-             └────────────┬───┴───┬────────────┘
-                          │       │
-                       SECURITY  │
-                          │       │
-              ┌───────────┼───────┼───────────┐
-              │           │       │           │
-           OFFENSE     ANALYSIS   AI       DEFENSE
-              │           │       │           │
-              └───────────┴───────┴───────────┘
-                          │
-                    FORENSICS / IR
-                          │
-                       RESEARCH
+                              HIDDEN RESEARCH
+                                     │
+             ┌───────────────────────┼───────────────────────┐
+             │                       │                       │
+          SYSTEMS                 NETWORKS                HUMAN
+             │                       │                       │
+      OS · Runtime              Protocols               Identity
+      Binary · Memory           Traffic                 Behaviour
+             │                       │                       │
+             └───────────────────────┼───────────────────────┘
+                                     │
+                                     ▼
+                              SECURITY RESEARCH
+                                     │
+                 ┌───────────────────┼───────────────────┐
+                 │                   │                   │
+              OFFENSE             ANALYSIS            DEFENSE
+                 │                   │                   │
+             Assessment          Reverse Eng.        Detection
+             Exploitation        Forensics            Response
+             Adversarial         Behaviour             Hardening
+                 │                   │                   │
+                 └───────────────────┼───────────────────┘
+                                     │
+                                     ▼
+                              AI & AUTOMATION
+                                     │
+                                     ▼
+                              NEW QUESTIONS
+                                     │
+                                     ▼
+                                RESEARCH
 ```
 
-The important part is the progression, not the number of boxes.
+---
 
-The repository began with foundational implementations and gradually expanded into web security, network security, malware analysis, IoT, cloud security, cryptography, mobile security, AI security, and DFIR. The current structure records 125 advanced projects alongside 20 foundational projects.
+### Research Progression
+
+```text
+01  FOUNDATION
+    Programming · Linux · Networking · Security Fundamentals
+                         │
+                         ▼
+02  APPLICATION
+    Web · Network · System · Cloud · Mobile Security
+                         │
+                         ▼
+03  SPECIALIZATION
+    Malware · Reverse Engineering · IoT · Cryptography · DFIR
+                         │
+                         ▼
+04  EXPERIMENTATION
+    AI Security · Detection · Automation · Adversarial Research
+                         │
+                         ▼
+05  RESEARCH
+    Hypothesis → Experiment → Evidence → Analysis → Findings
+                         │
+                         └──────────────→ New Question
+```
 
 <div align="center">
 
 <br>
 
-> **Understand the system first.**
->
-> **Then understand how it fails.**
->
-> **Then understand how to defend it.**
+<img src="https://capsule-render.vercel.app/api?type=rect&color=00ff9d&height=2&section=header" width="75%"/>
+
+<br><br>
+
+**145 PROJECTS · 10 DOMAINS · 3 YEARS**
 
 <br>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0d1117&height=2&section=header"/>
+<sub>
+The repository currently contains 125 advanced projects and 20 foundational implementations.
+</sub>
+
+<br><br>
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=13&duration=3500&pause=1100&color=00FF9D&center=true&vCenter=true&width=700&lines=READ+THE+SYSTEM;TRACE+THE+ASSUMPTION;TEST+THE+BOUNDARY;DOCUMENT+THE+RESULT" alt="Research methodology"/>
 
 </div>
+
+---
+
+> **The objective is not to collect techniques.**
+>
+> **The objective is to understand the systems those techniques operate against.**
