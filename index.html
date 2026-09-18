@@ -3,501 +3,3589 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090b12">
+  <meta name="theme-color" content="#020408">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Hidden Research — interactive cybersecurity research archive built from Osxninja/cybersecurity-projects.">
-    <title>HIDDEN RESEARCH // Cybersecurity Research Archive</title>
+  <meta name="description" content="HIDDEN EYE SECURITY — advanced cybersecurity research workstation with interactive logic flowcharts, research paper showcases, and technical dossiers.">
+  <title>HIDDEN EYE SECURITY // Cybersecurity Research Archive & Flowcharts</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid.js for Flowchart rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
   <style>
+/* ==========================================================================
+   HIDDEN EYE SECURITY DESIGN SYSTEM: CYAN, GREEN & RED MATRIX PALETTE
+   ========================================================================== */
+:root {
+  --bg-deep: #020408;
+  --bg-surface: #060a10;
+  --bg-card: rgba(8, 14, 24, 0.72);
+  --bg-card-hover: rgba(14, 22, 38, 0.92);
+  
+  --cyan-neon: #00f0ff;
+  --cyan-bright: #38f8ff;
+  --cyan-dim: #0099b8;
+  --cyan-glow: 0 0 25px rgba(0, 240, 255, 0.4);
+  
+  --green-neon: #00ff66;
+  --green-bright: #39ff7f;
+  --green-dim: #00cc52;
+  --green-glow: 0 0 25px rgba(0, 255, 102, 0.45);
+  --green-subtle: rgba(0, 255, 102, 0.12);
 
-:root{--bg:#080a10;--bg2:#0b0e16;--panel:rgba(15,18,28,.78);--panel2:#101420;--text:#f3f5fa;--muted:#8d94a5;--muted2:#646c7c;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.15);--indigo:#7785ff;--cyan:#91e8ff;--mint:#97f6cb;--violet:#b7a3ff;--radius:24px;--ease:cubic-bezier(.22,1,.36,1);--shadow:0 30px 90px rgba(0,0,0,.30)}
-*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;background:radial-gradient(900px 520px at 82% 0%,rgba(119,133,255,.13),transparent 60%),radial-gradient(850px 520px at 5% 20%,rgba(145,232,255,.07),transparent 60%),linear-gradient(180deg,#080a10 0%,#090b12 50%,#07090e 100%);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input,select{font:inherit}::selection{background:rgba(145,232,255,.22);color:#fff}.wrap{max-width:1440px;margin:0 auto;padding:0 30px}.progress{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--indigo),var(--cyan));transform:scaleX(0);transform-origin:left center;z-index:100;box-shadow:0 0 18px rgba(145,232,255,.35)}#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}.gridveil{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.34;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg,#000,transparent 85%)}.spotlight{position:fixed;z-index:1;width:340px;height:340px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(119,133,255,.10),rgba(145,232,255,.028) 35%,transparent 68%);filter:blur(10px);opacity:.7}.topbar{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.065);background:rgba(8,10,16,.56);backdrop-filter:blur(12px)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:13px;letter-spacing:.12em}.brand-mark{width:32px;height:32px;border:1px solid var(--line2);border-radius:10px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(119,133,255,.18),rgba(145,232,255,.05));box-shadow:inset 0 0 18px rgba(255,255,255,.02)}.brand-mark span{width:11px;height:11px;border-radius:3px;background:linear-gradient(135deg,var(--indigo),var(--cyan));box-shadow:0 0 18px rgba(119,133,255,.55)}.navlinks{display:flex;gap:4px}.navlinks a{color:#9ea6b7;font-size:12px;padding:10px 12px;border-radius:10px;transition:color .18s ease,background .18s ease}.navlinks a:hover{color:#fff;background:rgba(255,255,255,.04)}.nav-actions{display:flex;align-items:center;gap:10px}.status{font-size:9px;letter-spacing:.13em;color:#70788a;display:flex;gap:7px;align-items:center}.status i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px rgba(151,246,203,.5)}.nav-cta{font-size:12px;border:1px solid var(--line2);border-radius:10px;padding:9px 12px;background:rgba(255,255,255,.025);transition:transform .2s var(--ease),border-color .2s ease}.nav-cta:hover{transform:translateY(-2px);border-color:rgba(145,232,255,.35)}
-.section-shell{position:relative;z-index:3;padding:110px 0}.section-shell.compact{padding:86px 0}.hero{min-height:calc(100vh - 72px);display:grid;align-items:center;padding-top:72px}.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:64px;align-items:center}.eyebrow{display:flex;align-items:center;gap:9px;font-size:9px;letter-spacing:.16em;color:#aeb5c2;margin-bottom:22px}.eyebrow-line{width:38px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan))}.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px rgba(145,232,255,.6)}.hero h1{font-size:clamp(64px,8.2vw,128px);line-height:.88;letter-spacing:-.065em;margin:0;font-weight:850;max-width:900px}.hero h1:after{content:"";display:block;width:130px;height:2px;margin-top:26px;background:linear-gradient(90deg,var(--indigo),transparent)}.hero-highlight{color:transparent;background:linear-gradient(100deg,#ffffff 0%,#c3c7ff 45%,#8ee8ff 88%);-webkit-background-clip:text;background-clip:text}.hero-copy{font-size:17px;line-height:1.75;color:#9aa2b1;max-width:720px;margin:28px 0 30px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px}.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:rgba(255,255,255,.028);color:#edf0f6;padding:12px 15px;border-radius:12px;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s ease,background .22s ease}.btn:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 16px 38px rgba(0,0,0,.22)}.btn-primary{background:linear-gradient(135deg,rgba(119,133,255,.18),rgba(145,232,255,.07));border-color:rgba(119,133,255,.33)}.btn-primary:hover{box-shadow:0 0 0 1px rgba(119,133,255,.08),0 18px 50px rgba(48,58,110,.18)}.kbd{font-size:9px;padding:3px 6px;border:1px solid var(--line2);border-radius:6px;color:#757d8e;background:rgba(255,255,255,.03)}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}.hero-tags span{font-size:10px;letter-spacing:.07em;color:#7f8797;border:1px solid var(--line);padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.018)}
-.research-console-wrap{position:relative;min-height:520px;display:grid;place-items:center}.console-glow{position:absolute;inset:12% 2% 8%;background:radial-gradient(circle at 50% 50%,rgba(119,133,255,.18),transparent 58%);filter:blur(50px)}.console{position:relative;width:min(640px,100%);border:1px solid var(--line2);border-radius:26px;background:linear-gradient(180deg,rgba(17,21,32,.92),rgba(11,14,21,.94));box-shadow:var(--shadow);overflow:hidden;transform:translateZ(0)}.console:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(119,133,255,.38),transparent 38%,rgba(145,232,255,.15));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}.console-top{height:50px;display:flex;align-items:center;padding:0 17px;border-bottom:1px solid var(--line);gap:12px;color:#6f7889;font-size:10px}.window-dots{display:flex;gap:6px}.window-dots i{width:7px;height:7px;border-radius:50%;background:#565e6d}.console-top b{margin-left:auto;color:var(--mint);font-size:8px;letter-spacing:.12em}.console-body{padding:22px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:12px;line-height:1.9;color:#c0c6d2}.console-line{display:grid;grid-template-columns:26px 12px 1fr auto;gap:6px;align-items:center}.console-line .prompt{color:#5e687b}.console-line em{font-style:normal;color:var(--mint);font-size:10px}.console-block{margin:16px 0;padding:14px 14px;border:1px solid var(--line);border-left-color:rgba(119,133,255,.35);background:rgba(255,255,255,.02);color:#9da5b4}.console-block span{color:#aeb1ff}.console-block .accent{color:var(--cyan)}.indent{padding-left:18px}.cursor-blink{display:inline-block;color:var(--cyan);font-style:normal;animation:blink 1s steps(1,end) infinite}.console-divider{height:1px;background:var(--line);margin:18px 0}.console-foot{display:flex;justify-content:space-between;color:#677082;font-size:8px;letter-spacing:.1em}.orbit{position:absolute;border:1px solid rgba(119,133,255,.14);border-radius:50%;pointer-events:none;animation:spin 24s linear infinite}.orbit i{position:absolute;width:7px;height:7px;border-radius:50%;top:-3px;left:50%;background:var(--indigo);box-shadow:0 0 18px rgba(119,133,255,.75)}.orbit-1{width:370px;height:370px;right:0;bottom:-6%;}.orbit-2{width:250px;height:250px;right:14%;bottom:7%;animation-direction:reverse;animation-duration:18s;border-color:rgba(145,232,255,.1)}.orbit-2 i{background:var(--cyan);box-shadow:0 0 18px rgba(145,232,255,.72)}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:34px;margin-bottom:34px}.section-head h2{font-size:clamp(44px,5vw,76px);line-height:.92;letter-spacing:-.06em;margin:11px 0 0}.section-head h2 span{color:#6e7585}.section-head p{max-width:560px;color:#8c94a3;line-height:1.7;font-size:14px;margin:0}.kicker,.panel-label{font-size:9px;letter-spacing:.15em;color:#7e88a3}.metric-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--line)}.metric-strip article{background:rgba(13,16,24,.88);padding:26px 23px;min-height:120px;position:relative;overflow:hidden}.metric-strip article:after{content:"";position:absolute;width:130px;height:130px;right:-45px;bottom:-55px;background:radial-gradient(circle,rgba(119,133,255,.10),transparent 68%)}.metric-strip strong{display:block;font-size:48px;letter-spacing:-.06em}.metric-strip span{display:block;margin-top:4px;color:#70788a;font-size:10px;letter-spacing:.09em;text-transform:uppercase}.system-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;margin-top:16px}.panel{border:1px solid var(--line);background:var(--panel);border-radius:26px;box-shadow:var(--shadow);overflow:hidden}.topology{min-height:500px;position:relative;padding:28px}.topology-svg{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px)}.topo-node{position:absolute;min-width:165px;padding:13px 14px;border:1px solid var(--line2);background:rgba(10,13,20,.88);border-radius:15px;box-shadow:0 12px 32px rgba(0,0,0,.22);transition:transform .22s var(--ease),border-color .22s ease}.topo-node:hover{transform:translateY(-4px);border-color:rgba(145,232,255,.3)}.topo-node b{display:block;font-size:10px;letter-spacing:.08em}.topo-node span{display:block;color:#70788a;font-size:9px;margin-top:4px}.n1{left:10%;top:17%}.n2{left:39%;top:45%}.n3{right:7%;top:18%}.n4{left:36%;bottom:11%}.n5{right:7%;bottom:12%}.center-node{box-shadow:0 0 0 1px rgba(119,133,255,.06),0 20px 60px rgba(119,133,255,.08)}.thesis{padding:30px;display:flex;flex-direction:column}.thesis blockquote{font-size:30px;line-height:1.1;letter-spacing:-.04em;margin:28px 0 18px;color:#eceff6}.thesis p{color:#818a99;line-height:1.8;font-size:14px;margin:0}.signal-list{margin-top:auto;border-top:1px solid var(--line);padding-top:22px;display:grid;gap:12px}.signal-list div{display:grid;grid-template-columns:38px 1fr;column-gap:10px;align-items:center}.signal-list span{grid-row:span 2;color:#697184;font-size:9px}.signal-list b{font-size:12px}.signal-list small{color:#686f80;font-size:9px}
-.archive-shell{padding:18px}.archive-toolbar{display:grid;grid-template-columns:1fr 200px 180px;gap:10px}.search-field{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);padding:0 13px}.search-field span{color:#727a8a;font-size:16px}.search-field input,.archive-toolbar select{border:0;outline:0;background:transparent;color:#e9ecf1;width:100%;height:46px}.archive-toolbar select{border:1px solid var(--line);border-radius:12px;padding:0 12px;background:#0d111a}.archive-toolbar select option{background:#0d111a;color:#fff}.domain-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.018);color:#7c8493;border-radius:999px;padding:7px 10px;font-size:9px;letter-spacing:.08em;cursor:pointer;transition:color .18s ease,border-color .18s ease,background .18s ease,transform .18s var(--ease)}.chip:hover{transform:translateY(-1px);color:#b9c0cc}.chip.active{color:#dce3ee;border-color:rgba(119,133,255,.35);background:rgba(119,133,255,.08)}.results-meta{display:flex;justify-content:space-between;gap:20px;color:#656d7d;font-size:9px;letter-spacing:.08em;margin:17px 2px}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.project{display:block;position:relative;border:1px solid var(--line);border-radius:18px;padding:19px;background:linear-gradient(180deg,rgba(18,22,32,.82),rgba(12,15,22,.9));min-height:218px;cursor:pointer;transition:transform .22s var(--ease),border-color .22s ease,box-shadow .22s ease,background .22s ease}.project:after{content:"";position:absolute;inset:auto 18px 0 18px;height:1px;background:linear-gradient(90deg,transparent,rgba(145,232,255,.22),transparent);opacity:.5}.project:hover,.project:focus-visible{transform:translateY(-5px);border-color:rgba(145,232,255,.23);box-shadow:0 22px 60px rgba(0,0,0,.25);outline:none;background:linear-gradient(180deg,rgba(20,24,36,.92),rgba(12,16,24,.96))}.project-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.project-num,.project-domain{font-size:8px;letter-spacing:.1em}.project-num{color:#5f6777}.project-domain{color:#8190bd}.project h3{font-size:18px;line-height:1.16;letter-spacing:-.02em;margin:30px 0 10px;max-width:95%}.project p{font-size:11px;line-height:1.65;color:#757d8c;margin:0}.project-foot{position:absolute;left:19px;right:19px;bottom:16px;display:flex;justify-content:space-between;color:#646d7e;font-size:8px;letter-spacing:.09em}.empty{grid-column:1/-1;border:1px dashed var(--line2);padding:60px 20px;text-align:center;color:#747c8b;border-radius:18px}
-.method-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.method-card{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(14,18,26,.72);min-height:210px;transition:transform .22s var(--ease),border-color .22s ease}.method-card:hover{transform:translateY(-4px);border-color:rgba(119,133,255,.24)}.method-card span{font-size:9px;color:#6b7485;letter-spacing:.12em}.method-card h3{margin:30px 0 10px;font-size:16px}.method-card p{margin:0;color:#777f8e;line-height:1.75;font-size:11px}.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.about-card{padding:30px}.about-card h2{font-size:38px;line-height:1;letter-spacing:-.05em;margin:20px 0}.about-card h2 span{color:#80889a}.about-card p{color:#808898;line-height:1.8;font-size:13px;max-width:620px}.about-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.about-chips span{font-size:9px;color:#7a8393;border:1px solid var(--line);border-radius:999px;padding:7px 9px}.security-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}.security-grid div{border:1px solid var(--line);border-radius:13px;padding:13px;background:rgba(255,255,255,.018)}.security-grid b{display:block;font-size:10px}.security-grid span{display:block;color:#6d7585;font-size:9px;margin-top:4px}.reveal{opacity:1;transform:none;transition:transform .65s var(--ease)}.reveal:not(.is-visible){animation:sectionIn .7s var(--ease) both}.reveal.is-visible{opacity:1;transform:none}@keyframes sectionIn{from{transform:translateY(18px)}to{transform:translateY(0)}}footer{position:relative;z-index:3;border-top:1px solid var(--line);padding:24px 0 30px;color:#5f6879;font-size:9px;letter-spacing:.09em}.footer-row{display:flex;justify-content:space-between;gap:20px}.footer-creators{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;color:#687386;font-size:9px;letter-spacing:.13em;text-transform:uppercase}.footer-creators a{color:#b8c3d6;text-decoration:none;transition:color .2s ease,transform .2s ease}.footer-creators a:hover{color:#91e8ff;transform:translateY(-1px)}.creator-dot{color:#454d5d}
-.modal-backdrop{position:fixed;inset:0;background:rgba(3,5,8,.78);backdrop-filter:blur(12px);z-index:100;display:grid;place-items:center;padding:18px}.modal{width:min(1100px,100%);max-height:90vh;overflow:auto;border:1px solid var(--line2);background:#0b0f16;border-radius:24px;box-shadow:0 40px 130px rgba(0,0,0,.55);animation:modalIn .28s var(--ease)}.modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:16px;padding:22px 24px;border-bottom:1px solid var(--line);background:rgba(11,15,22,.94);backdrop-filter:blur(10px)}.modal-kicker{font-size:9px;letter-spacing:.12em;color:#8d97ba}.modal-title{font-size:32px;line-height:1.05;letter-spacing:-.04em;margin-top:8px}.modal-path{color:#657082;font-size:10px;margin-top:8px;word-break:break-word}.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#e7ebf1;font-size:20px;cursor:pointer}.modal-body{padding:24px}.md-wrap{color:#b6bdc9;line-height:1.75;font-size:13px}.md-wrap h1,.md-wrap h2,.md-wrap h3,.md-wrap h4,.md-wrap h5,.md-wrap h6{color:#eef1f6;line-height:1.15;letter-spacing:-.03em}.md-wrap h1{font-size:30px}.md-wrap h2{font-size:22px;margin-top:30px}.md-wrap h3{font-size:17px;margin-top:24px}.md-wrap p{margin:10px 0}.md-wrap code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#d0c6ff;background:rgba(119,133,255,.08);padding:2px 5px;border-radius:5px}.md-wrap pre{overflow:auto;border:1px solid var(--line);border-radius:14px;padding:16px;background:#080b11}.md-wrap pre code{background:none;padding:0;color:#bcc5d1}.md-wrap blockquote{margin:17px 0;padding-left:14px;border-left:2px solid var(--indigo);color:#9ea7b7}.md-wrap ul{padding-left:20px}.md-wrap a{color:#8fe3ff}.md-wrap table{width:100%;border-collapse:collapse;font-size:11px}.md-wrap th,.md-wrap td{padding:8px;border:1px solid var(--line);vertical-align:top}.modal-source{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.loading{min-height:280px;display:grid;place-items:center;color:#727b8c}.spinner{width:35px;height:35px;border-radius:50%;border:1px solid rgba(255,255,255,.11);border-top-color:var(--cyan);animation:spin 1s linear infinite}.source-error{padding:50px 10px;text-align:center;color:#818a99}.source-error a{color:var(--cyan)}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:0}}@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
-@media (max-width:1120px){.hero-grid,.system-grid,.split-grid{grid-template-columns:1fr}.research-console-wrap{min-height:500px}.project-grid{grid-template-columns:repeat(2,1fr)}.method-grid{grid-template-columns:repeat(2,1fr)}.metric-strip{grid-template-columns:repeat(2,1fr)}.archive-toolbar{grid-template-columns:1fr 1fr}.archive-toolbar select:last-child{grid-column:1/-1}}
-@media (max-width:820px){.wrap{padding:0 18px}.navlinks,.status{display:none}.hero{padding-top:52px}.hero-grid{gap:40px}.hero h1{font-size:66px}.section-shell{padding:82px 0}.section-shell.compact{padding:70px 0}.section-head{display:block}.section-head p{margin-top:18px}.project-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}.archive-toolbar{grid-template-columns:1fr}.archive-toolbar select:last-child{grid-column:auto}.footer-row{display:block}.footer-row span{display:block}.footer-row span+span{margin-top:8px}.footer-creators{flex-wrap:wrap;line-height:1.7;text-align:center}.topo-node{min-width:130px}.n1{left:4%}.n3,.n5{right:3%}.n4{left:33%}}
-@media (max-width:560px){.nav{height:64px}.hero h1{font-size:53px}.hero-copy{font-size:14px}.metric-strip{grid-template-columns:1fr}.metric-strip strong{font-size:40px}.research-console-wrap{min-height:425px}.console-body{padding:17px;font-size:10px}.orbit-1{width:280px;height:280px}.orbit-2{width:190px;height:190px}.topology{min-height:430px}.topo-node{min-width:105px;padding:10px}.topo-node b{font-size:8px}.topo-node span{font-size:7px}.thesis blockquote{font-size:24px}.modal-title{font-size:25px}.modal-body{padding:18px}.hero-tags span{font-size:8px}}
-@media (max-width:400px){.hero h1{font-size:46px}.topo-node{min-width:95px}.n2{left:31%}.n4{left:27%}}
-@media (pointer:coarse){.spotlight{display:none}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.btn,.project,.method-card,.topo-node,.nav-cta{transition:none}.orbit,.spinner,.cursor-blink{animation:none}.spotlight{display:none}}
+  --red-neon: #ff0055;
+  --red-bright: #ff3377;
+  --red-dim: #cc0044;
+  --red-glow: 0 0 25px rgba(255, 0, 85, 0.45);
+  --red-subtle: rgba(255, 0, 85, 0.12);
+  
+  --panel: rgba(8, 14, 24, 0.75);
+  --panel-border: rgba(0, 240, 255, 0.22);
+  --panel-border-glow: rgba(0, 240, 255, 0.45);
+  
+  --silver-100: #ffffff;
+  --silver-200: #eef6fa;
+  --silver-300: #d0e2ec;
+  --silver-400: #9ab4c6;
+  --silver-500: #6b8498;
+  --silver-600: #485c6c;
+  --silver-700: #2a3b49;
+  --silver-800: #16222c;
+  --silver-900: #0a131a;
 
-/* Finishing layer: depth, focus, and responsive micro-interactions. */
-:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.topbar.scrolled{background:rgba(8,10,16,.84);border-bottom-color:rgba(145,232,255,.15);box-shadow:0 12px 34px rgba(0,0,0,.16)}.navlinks a.active{color:#fff;background:rgba(119,133,255,.1);box-shadow:inset 0 0 0 1px rgba(119,133,255,.12)}
-.hero-copy-block,.research-console-wrap{animation:heroRise 1s var(--ease) both}.research-console-wrap{animation-delay:.12s}.project,.method-card,.panel,.metric-strip article{will-change:transform}.project{--mouse-x:50%;--mouse-y:50%;isolation:isolate}.project:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(240px circle at var(--mouse-x) var(--mouse-y),rgba(145,232,255,.13),transparent 65%);transition:opacity .25s ease;z-index:-1}.project:hover:before,.project:focus-visible:before{opacity:1}.btn-primary{position:relative;overflow:hidden}.btn-primary:after{content:"";position:absolute;inset:-100% 35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-180%) rotate(18deg);transition:transform .7s var(--ease)}.btn-primary:hover:after{transform:translateX(180%) rotate(18deg)}.section-head h2{background:linear-gradient(110deg,#fff 10%,#c8ceff 48%,#91e8ff 90%);background-clip:text;-webkit-background-clip:text;color:transparent}.section-head h2 span{color:#81899a;background:none;-webkit-text-fill-color:initial}.metric-strip article strong{background:linear-gradient(135deg,#fff,var(--cyan));background-clip:text;-webkit-background-clip:text;color:transparent}@keyframes heroRise{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.hero-copy-block,.research-console-wrap{animation:none}.btn-primary:after{display:none}}
+  --text-primary: #ffffff;
+  --text-secondary: #d0e2ec;
+  --text-muted: #8ca4b8;
+  --text-dim: #5c7488;
 
-/* Premium visual refinement */
-:root{--glass:rgba(17,22,35,.64);--glow:0 0 0 1px rgba(145,232,255,.08),0 24px 80px rgba(0,0,0,.34)}
-body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(600px 360px at 50% 22%,rgba(119,133,255,.09),transparent 72%)}
-.topbar{background:rgba(7,10,17,.64);box-shadow:0 1px 0 rgba(255,255,255,.025)}
-.brand-mark{position:relative;overflow:hidden}.brand-mark:after{content:"";position:absolute;width:80px;height:1px;background:var(--cyan);opacity:.5;transform:rotate(-45deg) translateX(-35px);animation:markSweep 4s ease-in-out infinite}
-.hero{position:relative}.hero-copy-block{max-width:780px}.hero h1{font-weight:900;text-wrap:balance;text-shadow:0 10px 55px rgba(119,133,255,.12)}.hero h1:after{height:3px;width:170px;box-shadow:0 0 22px rgba(145,232,255,.35)}
-.hero-copy{max-width:650px;color:#aab3c3}.hero-tags span{transition:transform .25s var(--ease),border-color .25s ease,background .25s ease}.hero-tags span:hover{transform:translateY(-3px);border-color:rgba(145,232,255,.28);background:rgba(145,232,255,.05)}
-.btn{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}.btn-primary{box-shadow:0 12px 35px rgba(80,91,200,.16),inset 0 1px 0 rgba(255,255,255,.12)}
-.console{box-shadow:var(--glow);backdrop-filter:blur(18px)}.console-top{background:linear-gradient(90deg,rgba(119,133,255,.08),transparent 55%)}.console-block{box-shadow:inset 3px 0 rgba(145,232,255,.12)}
-.panel,.archive-shell{background:linear-gradient(145deg,rgba(20,25,39,.72),rgba(10,14,23,.78));box-shadow:var(--glow);backdrop-filter:blur(16px)}.metric-strip{box-shadow:var(--glow)}.metric-strip article{transition:background .25s ease,transform .25s var(--ease)}.metric-strip article:hover{transform:translateY(-4px);background:rgba(20,26,40,.98)}
-.topo-node{backdrop-filter:blur(10px)}.center-node{border-color:rgba(145,232,255,.3);background:linear-gradient(135deg,rgba(57,64,125,.35),rgba(10,13,20,.9))}.thesis blockquote{background:linear-gradient(110deg,#fff,#aeb7ff 48%,#91e8ff);background-clip:text;-webkit-background-clip:text;color:transparent}
-.archive-shell{padding:22px}.search-field:focus-within{border-color:rgba(145,232,255,.38);box-shadow:0 0 0 4px rgba(145,232,255,.06)}.archive-toolbar select:hover{border-color:rgba(145,232,255,.3)}
-.project{background:linear-gradient(145deg,rgba(24,30,47,.78),rgba(10,14,23,.94));box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}.project h3{font-weight:750}.project:after{transition:opacity .25s ease;opacity:.8}.project:hover:after{opacity:1}
-.method-card{background:linear-gradient(145deg,rgba(22,27,42,.7),rgba(11,15,24,.82));box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}.method-card span{color:var(--cyan)}
-@keyframes markSweep{0%,55%{transform:rotate(-45deg) translateX(-48px)}80%,100%{transform:rotate(-45deg) translateX(48px)}}
-@media (max-width:560px){.archive-shell{padding:14px}.hero h1{line-height:.92}.hero-copy{line-height:1.65}.panel{border-radius:20px}}
+  --line: rgba(0, 240, 255, 0.14);
+  --line-strong: rgba(0, 240, 255, 0.32);
+  --line-subtle: rgba(255, 255, 255, 0.06);
 
-/* Smooth interaction layer */
-html{scroll-padding-top:86px}
-body{--cursor-x:50vw;--cursor-y:30vh}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(280px circle at var(--cursor-x) var(--cursor-y),rgba(145,232,255,.055),transparent 70%);mix-blend-mode:screen;opacity:.8}
-.topbar{transition:background .35s ease,box-shadow .35s ease,transform .35s var(--ease)}
-.topbar.scrolled{box-shadow:0 14px 48px rgba(0,0,0,.28)}
-.btn,.nav-cta,.chip{transform:translateZ(0)}
-.btn:active,.nav-cta:active,.chip:active{transform:translateY(1px) scale(.98)}
-.project,.method-card,.topo-node,.metric-strip article,.about-card{transform-style:preserve-3d;backface-visibility:hidden}
-.project{transition:transform .5s var(--ease),border-color .3s ease,box-shadow .5s ease,background .3s ease}
-.project.is-entering{animation:cardEnter .65s var(--ease) both}
-.project:nth-child(3n+2).is-entering{animation-delay:.06s}.project:nth-child(3n+3).is-entering{animation-delay:.12s}
-.project:before{transition:opacity .35s ease,background .35s ease}
-.metric-strip article strong{font-variant-numeric:tabular-nums}
-.reveal{will-change:transform,opacity}
-.reveal.is-visible{animation:revealUp .8s var(--ease) both}
-.console{animation:consoleFloat 7s ease-in-out infinite}
-.console-top b{animation:statusPulse 2.2s ease-in-out infinite}
-.orbit-1{animation-duration:30s}.orbit-2{animation-duration:21s}
-.modal-backdrop{animation:backdropIn .25s ease both}.modal{animation:modalIn .42s var(--ease) both}
-@keyframes revealUp{from{opacity:0;transform:translateY(24px) scale(.985);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
-@keyframes cardEnter{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-@keyframes consoleFloat{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-8px) rotateX(.35deg)}}
-@keyframes statusPulse{0%,100%{opacity:.55;text-shadow:none}50%{opacity:1;text-shadow:0 0 14px rgba(151,246,203,.65)}}
-@keyframes backdropIn{from{opacity:0}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){body:after{display:none}.console,.console-top b{animation:none}.reveal.is-visible,.project.is-entering{animation:none}.project,.method-card,.topo-node,.metric-strip article,.about-card{transform:none!important}}
+  --chrome-grad: linear-gradient(135deg, #ffffff 0%, #cce7f5 35%, #00f0ff 75%, #ffffff 100%);
+  --cyan-grad: linear-gradient(135deg, #00f0ff 0%, #00a8cc 50%, #ffffff 100%);
+  --green-grad: linear-gradient(135deg, #00ff66 0%, #00b347 100%);
+  --red-grad: linear-gradient(135deg, #ff0055 0%, #cc0044 100%);
+  --silver-grad: linear-gradient(180deg, rgba(0, 240, 255, 0.2) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --btn-grad: linear-gradient(135deg, rgba(0, 240, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --btn-grad-hover: linear-gradient(135deg, rgba(0, 240, 255, 0.38) 0%, rgba(0, 168, 204, 0.22) 100%);
 
-/* Final polish: layered motion, clearer hierarchy, and safer compositor-friendly effects. */
-.hero-copy-block,.research-console-wrap{opacity:0;animation:heroReveal .9s var(--ease) .08s forwards}
-.research-console-wrap{animation-delay:.18s}
-.eyebrow-dot{animation:signalPulse 1.8s ease-in-out infinite}
-.hero-tags span{position:relative;overflow:hidden}
-.hero-tags span::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.18),transparent 75%);transform:translateX(-120%);transition:transform .7s var(--ease)}
-.hero-tags span:hover::after{transform:translateX(120%)}
-.console::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(145,232,255,.08) 50%,transparent 65%);transform:translateX(-120%);animation:consoleScan 6s ease-in-out infinite}
-.console-block{position:relative;overflow:hidden}
-.console-block::after{content:"";position:absolute;left:0;right:0;top:-100%;height:100%;background:linear-gradient(180deg,transparent,rgba(145,232,255,.06),transparent);animation:blockScan 4.5s ease-in-out infinite}
-.metric-strip article,.project,.method-card,.about-card,.topo-node{transition:transform .45s var(--ease),border-color .3s ease,box-shadow .45s ease,background .3s ease}
-.metric-strip article:hover{box-shadow:0 18px 42px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.08)}
-.project:hover,.project:focus-visible{box-shadow:0 24px 70px rgba(0,0,0,.34),0 0 0 1px rgba(145,232,255,.06)}
-.project h3,.method-card h3{transition:color .25s ease,transform .35s var(--ease)}
-.project:hover h3,.project:focus-visible h3,.method-card:hover h3{color:#fff;transform:translateX(3px)}
-.signal-list div{transition:transform .3s var(--ease),color .25s ease}
-.signal-list div:hover{transform:translateX(6px)}
-.search-field input::placeholder{transition:color .25s ease}
-.search-field:focus-within input::placeholder{color:#aab8c8}
-.modal-source .btn{position:relative;overflow:hidden}
-.modal-source .btn::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(145,232,255,.12),transparent);transform:translateX(-110%);transition:transform .6s var(--ease)}
-.modal-source .btn:hover::before{transform:translateX(110%)}
-@keyframes heroReveal{from{opacity:0;transform:translateY(22px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
-@keyframes signalPulse{0%,100%{transform:scale(.8);opacity:.55}50%{transform:scale(1.35);opacity:1}}
-@keyframes consoleScan{0%,55%{transform:translateX(-120%)}80%,100%{transform:translateX(120%)}}
-@keyframes blockScan{0%,65%{transform:translateY(-120%)}90%,100%{transform:translateY(120%)}}
-@media (prefers-reduced-motion:reduce){.hero-copy-block,.research-console-wrap,.eyebrow-dot,.console::after,.console-block::after{animation:none;opacity:1}.hero-tags span::after,.modal-source .btn::before{display:none}.project h3,.method-card h3{transform:none!important}}
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
 
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 8px 32px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 35px rgba(0, 240, 255, 0.2), 0 20px 60px rgba(0, 0, 0, 0.85);
+  --silver-glow-strong: 0 0 25px rgba(0, 240, 255, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  background: 
+    radial-gradient(1200px 750px at 50% -10%, rgba(0, 240, 255, 0.1), transparent 70%),
+    radial-gradient(950px 600px at 90% 40%, rgba(0, 255, 102, 0.06), transparent 60%),
+    radial-gradient(950px 600px at 10% 80%, rgba(255, 0, 85, 0.06), transparent 60%),
+    var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+
+code, pre, .mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.4);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   CUSTOM CYBER SCROLLBAR (SLEEK CAPSULE SHAPE & NEON GLOW)
+   ========================================================================== */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #00f0ff rgba(4, 8, 14, 0.85);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(2, 6, 12, 0.85);
+  border-left: 1px solid rgba(0, 240, 255, 0.08);
+  border-radius: 9999px;
+  margin: 6px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f0ff 0%, #00ff66 50%, #ff0055 100%);
+  border-radius: 9999px;
+  border: 2px solid #020408;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #00f0ff 40%, #00ff66 80%, #ff0055 100%);
+  border-color: #000000;
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.9), 0 0 12px rgba(0, 255, 102, 0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Layout Container */
+.wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Background Video & Overlays (Crisp & Visible) */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.74;
+  filter: brightness(0.85) contrast(1.22) saturate(1.25);
+  transition: opacity 0.5s ease;
+}
+
+.bg-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(2, 6, 12, 0.35) 0%, rgba(1, 3, 6, 0.62) 75%, rgba(0, 0, 0, 0.82) 100%);
+  pointer-events: none;
+}
+
+/* Top Progress bar */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #00f0ff, #00ff66, #ff0055, #00f0ff);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: 1000;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.8);
+}
+
+/* Fixed Canvas & Grid */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.gridveil {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(circle at 50% 30%, black 50%, transparent 95%);
+}
+
+.spotlight {
+  position: fixed;
+  z-index: 1;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
+  filter: blur(32px);
+}
+
+/* ==========================================================================
+   NAVIGATION BAR WITH HIDDEN EYE SECURITY LOGO
+   ========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background: rgba(4, 8, 14, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.topbar.scrolled {
+  background: rgba(2, 4, 8, 0.95);
+  border-bottom-color: var(--line-strong);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.nav {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  transition: transform 0.25s ease;
+}
+
+.brand:hover {
+  transform: scale(1.02);
+}
+
+.brand-logo-frame {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.brand-logo-frame::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 40%, rgba(0, 240, 255, 0.35) 50%, transparent 60%);
+  animation: shine 4s infinite linear;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5));
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.brand-sub {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--cyan-neon);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.navlinks {
+  display: flex;
+  gap: 6px;
+  background: rgba(0, 240, 255, 0.04);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.navlinks a {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.navlinks a:hover, .navlinks a.active {
+  color: #ffffff;
+  background: rgba(0, 240, 255, 0.16);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 16px rgba(0, 240, 255, 0.25);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-badge {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--silver-300);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 255, 102, 0.06);
+  border: 1px solid rgba(0, 255, 102, 0.35);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(0, 255, 102, 0.2), 0 0 12px rgba(0, 255, 102, 0.15);
+}
+
+.status-badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-neon);
+  box-shadow: 0 0 12px var(--green-neon), 0 0 4px #ffffff;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.nav-cta {
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--panel-border-glow);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  background: var(--btn-grad);
+  color: #ffffff;
+  transition: all 0.3s var(--ease-smooth);
+  backdrop-filter: blur(10px);
+}
+
+.nav-cta:hover {
+  background: var(--btn-grad-hover);
+  border-color: var(--cyan-neon);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 240, 255, 0.35);
+}
+
+/* ==========================================================================
+   HERO SECTION & LOGO EMBLEM
+   ========================================================================== */
+.section-shell {
+  position: relative;
+  z-index: 3;
+  padding: 90px 0;
+}
+
+.section-shell.compact {
+  padding: 60px 0;
+}
+
+.hero {
+  min-height: calc(88vh - 78px);
+  display: flex;
+  align-items: center;
+  padding: 40px 0 60px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.hero-logo-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.hero-logo-wrap {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 240, 255, 0.5);
+  background: rgba(4, 8, 14, 0.85);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-main-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-logo-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.3), transparent 70%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--cyan-neon);
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0, 240, 255, 0.06);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+  font-weight: 700;
+}
+
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan-neon);
+  box-shadow: 0 0 10px var(--cyan-neon);
+}
+
+.hero h1 {
+  font-size: clamp(48px, 6vw, 86px);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
+}
+
+.hero-highlight {
+  background: linear-gradient(135deg, #00f0ff 0%, #38f8ff 40%, #ffffff 80%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  text-shadow: none;
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
+}
+
+.hero-copy {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 22px 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--btn-grad);
+  color: #ffffff;
+  padding: 13px 22px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan-neon);
+  background: var(--btn-grad-hover);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.35);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00f0ff 0%, #00b4d8 100%);
+  color: #000000;
+  border-color: var(--cyan-neon);
+  font-weight: 700;
+  box-shadow: 0 4px 25px rgba(0, 240, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 10px 35px rgba(0, 240, 255, 0.7);
+}
+
+.btn-ghost {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.25);
+  color: var(--silver-300);
+}
+
+.btn-ghost:hover {
+  color: #ffffff;
+  border-color: var(--cyan-neon);
+}
+
+.kbd {
+  font-size: 10px;
+  padding: 2px 7px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  color: var(--cyan-neon);
+  background: rgba(0, 240, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.hero-tags span {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--silver-400);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 240, 255, 0.03);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.hero-tags span:hover {
+  border-color: var(--cyan-neon);
+  color: #ffffff;
+  background: rgba(0, 240, 255, 0.12);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+}
+
+.hero-tags span.tag-green {
+  border-color: rgba(0, 255, 102, 0.35);
+  color: var(--green-neon);
+  background: rgba(0, 255, 102, 0.06);
+}
+
+.hero-tags span.tag-green:hover {
+  border-color: var(--green-neon);
+  background: rgba(0, 255, 102, 0.16);
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.3);
+}
+
+.hero-tags span.tag-red {
+  border-color: rgba(255, 0, 85, 0.35);
+  color: var(--red-neon);
+  background: rgba(255, 0, 85, 0.06);
+}
+
+.hero-tags span.tag-red:hover {
+  border-color: var(--red-neon);
+  background: rgba(255, 0, 85, 0.16);
+  box-shadow: 0 0 14px rgba(255, 0, 85, 0.3);
+}
+
+/* ==========================================================================
+   RESEARCH CONSOLE FLOWCHART (CYBER CYAN, GREEN & RED)
+   ========================================================================== */
+.research-console-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.console-glow {
+  position: absolute;
+  inset: 5% 5%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15), transparent 70%);
+  filter: blur(40px);
+}
+
+.console {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--panel-border-glow);
+  border-radius: var(--radius-xl);
+  background: rgba(6, 10, 18, 0.78);
+  box-shadow: var(--shadow-glow);
+  overflow: hidden;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.console-top {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  gap: 12px;
+  color: var(--silver-300);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #27272a;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.window-dots i:nth-child(1) { background: #ff0055; border-color: #ff3377; box-shadow: 0 0 6px rgba(255,0,85,0.6); }
+.window-dots i:nth-child(2) { background: #ffbb00; border-color: #ffdd33; }
+.window-dots i:nth-child(3) { background: #00ff66; border-color: #39ff7f; box-shadow: 0 0 6px rgba(0,255,102,0.6); }
+
+.console-top b {
+  margin-left: auto;
+  color: var(--green-neon);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 255, 102, 0.4);
+  background: rgba(0, 255, 102, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.25);
+}
+
+.console-body {
+  padding: 24px;
+}
+
+.hero-flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flow-step-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border: 1px solid var(--line-strong);
+  background: rgba(0, 240, 255, 0.035);
+  border-radius: var(--radius-md);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.flow-step-box:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: var(--cyan-neon);
+  transform: translateX(4px);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.flow-step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.14);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  color: var(--cyan-neon);
+  font-weight: 700;
+}
+
+.flow-step-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.flow-step-desc {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.flow-connector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--cyan-neon);
+  font-size: 14px;
+  height: 14px;
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.flow-branch-box {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  transition: all 0.25s ease;
+}
+
+.flow-branch-box.danger {
+  border: 1px dashed rgba(255, 0, 85, 0.5);
+  background: rgba(255, 0, 85, 0.06);
+}
+
+.flow-branch-box.danger:hover {
+  border-color: var(--red-neon);
+  box-shadow: 0 0 16px rgba(255, 0, 85, 0.25);
+}
+
+.flow-branch-box.danger b {
+  color: var(--red-neon);
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.4);
+}
+
+.flow-branch-box.safe {
+  border: 1px dashed rgba(0, 255, 102, 0.5);
+  background: rgba(0, 255, 102, 0.06);
+}
+
+.flow-branch-box.safe:hover {
+  border-color: var(--green-neon);
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.25);
+}
+
+.flow-branch-box.safe b {
+  color: var(--green-neon);
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+}
+
+.flow-branch-box b {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   METRICS & SYSTEM MAP
+   ========================================================================== */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 36px;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--cyan-neon);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+}
+
+.section-head h2 {
+  font-size: clamp(36px, 4.5vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.section-head h2 span {
+  color: var(--text-muted);
+}
+
+.section-head p {
+  max-width: 520px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--panel-border-glow);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--line);
+  gap: 1px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-glow);
+  backdrop-filter: blur(16px);
+}
+
+.metric-strip article {
+  background: rgba(8, 14, 24, 0.72);
+  padding: 30px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.metric-strip article:hover {
+  background: rgba(14, 24, 40, 0.92);
+  transform: translateY(-2px);
+}
+
+.metric-strip strong {
+  display: block;
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  background: var(--chrome-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.metric-strip span {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* System Map Grid */
+.system-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 20px;
+}
+
+.panel {
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-glow);
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.panel-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--silver-300);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 16px;
+}
+
+.topology {
+  min-height: 480px;
+  position: relative;
+  padding: 32px;
+}
+
+.topology-svg {
+  position: absolute;
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+}
+
+.topo-node {
+  position: absolute;
+  min-width: 175px;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  background: rgba(16, 16, 24, 0.8);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s var(--ease-smooth);
+  backdrop-filter: blur(14px);
+  cursor: default;
+}
+
+.topo-node:hover {
+  transform: translateY(-4px);
+  border-color: #ffffff;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.topo-node b {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.topo-node span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.center-node {
+  border-color: #ffffff;
+  background: linear-gradient(135deg, rgba(38, 38, 52, 0.9), rgba(16, 16, 24, 0.95));
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.18);
+}
+
+.n1 { left: 8%; top: 16%; }
+.n2 { left: 40%; top: 46%; }
+.n3 { right: 8%; top: 16%; }
+.n4 { left: 35%; bottom: 12%; }
+.n5 { right: 8%; bottom: 12%; }
+
+.thesis {
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+}
+
+.thesis blockquote {
+  font-size: 26px;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  margin: 16px 0 20px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.thesis p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.signal-list {
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.signal-list div {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 12px;
+  align-items: center;
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+.signal-list div:hover {
+  transform: translateX(4px);
+}
+
+.signal-list span {
+  grid-row: span 2;
+  color: var(--silver-400);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.signal-list b {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.signal-list small {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   ULTRA-SMOOTH GLASS PROJECT ARCHIVE CARDS WITH GLOW
+   ========================================================================== */
+.archive-shell {
+  padding: 24px;
+}
+
+.archive-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 220px 200px;
+  gap: 12px;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0 16px;
+  transition: all 0.3s var(--ease-smooth);
+  backdrop-filter: blur(10px);
+}
+
+.search-field:focus-within {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15), 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+.search-field span {
+  color: var(--silver-400);
+  font-size: 18px;
+}
+
+.search-field input, .archive-toolbar select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #ffffff;
+  width: 100%;
+  height: 48px;
+  font-size: 13px;
+}
+
+.archive-toolbar select {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: 0 16px;
+  background: rgba(18, 18, 24, 0.88);
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+
+.archive-toolbar select:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.archive-toolbar select option {
+  background: #0d0d12;
+  color: #ffffff;
+}
+
+.domain-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--silver-400);
+  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  backdrop-filter: blur(8px);
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  color: #ffffff;
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 12px rgba(255,255,255,0.1);
+}
+
+.chip.active {
+  color: #000000;
+  border-color: #ffffff;
+  background: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 16px rgba(255, 255, 255, 0.35);
+}
+
+.results-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--silver-400);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  margin: 20px 2px 16px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ==========================================================================
+   ULTRA-SMOOTH GLASS PROJECT ARCHIVE CARDS (TRANSPARENT & SLEEK)
+   ========================================================================== */
+.project {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 20px;
+  padding: 28px 26px;
+  background: linear-gradient(145deg, rgba(8, 14, 24, 0.42) 0%, rgba(4, 8, 14, 0.58) 100%);
+  backdrop-filter: blur(16px) saturate(1.35);
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+  min-height: 240px;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.35s ease;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden;
+  will-change: transform, box-shadow;
+}
+
+/* Dynamic Silver Mouse Reflection Sheen */
+.project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.18), transparent 70%);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* Subtle top metallic light rim */
+.project::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), transparent);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.project:hover::before, .project:focus-visible::before {
+  opacity: 1;
+}
+
+.project:hover::after, .project:focus-visible::after {
+  opacity: 1;
+}
+
+.project:hover, .project:focus-visible {
+  transform: translateY(-6px) scale(1.012);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.88), 
+              0 0 32px rgba(0, 240, 255, 0.28), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  background: linear-gradient(145deg, rgba(14, 24, 42, 0.72) 0%, rgba(8, 14, 24, 0.85) 100%);
+  outline: none;
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.project-num {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--silver-400);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.project-domain {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 0 12px rgba(255,255,255,0.06);
+  transition: all 0.25s ease;
+}
+
+.project:hover .project-domain {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
+}
+
+.project h3 {
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin: 18px 0 10px;
+  color: #ffffff;
+  font-weight: 600;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.project:hover h3 {
+  transform: translateX(4px);
+  text-shadow: 0 0 20px rgba(255,255,255,0.45);
+}
+
+.project p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.project:hover p {
+  color: var(--silver-300);
+}
+
+.project-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--silver-400);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.06em;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-subtle);
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.3s ease;
+}
+
+.project:hover .project-foot {
+  border-top-color: var(--line-strong);
+}
+
+.project-foot .action-badge {
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+.project:hover .action-badge {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+}
+
+.empty {
+  grid-column: 1 / -1;
+  border: 1px dashed var(--line-strong);
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--silver-400);
+  border-radius: var(--radius-lg);
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================================================
+   RESEARCH PAPERS SHOWCASE CARDS & CITATIONS
+   ========================================================================== */
+.papers-header-badge {
+  margin: 34px 0 22px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+}
+
+.papers-kicker {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--silver-300);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.papers-title {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: #ffffff !important;
+  margin: 4px 0 8px !important;
+  border: none !important;
+  padding: 0 !important;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.papers-sub {
+  font-size: 13px;
+  color: var(--silver-400);
+  line-height: 1.6;
+  margin: 0 !important;
+}
+
+.papers-section-wrapper {
+  margin: 24px 0 34px;
+}
+
+.papers-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 18px;
+  margin: 16px 0;
+}
+
+.paper-card {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(145deg, rgba(18, 18, 26, 0.72) 0%, rgba(10, 10, 16, 0.85) 100%);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.paper-card:hover {
+  transform: translateY(-5px) scale(1.008);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 255, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  background: linear-gradient(145deg, rgba(30, 30, 44, 0.9) 0%, rgba(16, 16, 24, 0.95) 100%);
+}
+
+.paper-card:hover::before {
+  opacity: 1;
+}
+
+.paper-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.paper-num {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.paper-badge {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.paper-badge.year {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--silver-300);
+}
+
+.paper-badge.source {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+
+.paper-badge.badge-ieee {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.15);
+}
+
+.paper-badge.badge-acm {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.09));
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.18);
+}
+
+.paper-badge.badge-usenix {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.1));
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+.paper-badge.badge-ndss {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.1));
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.16);
+}
+
+.paper-badge.badge-arxiv {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.paper-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.paper-authors {
+  font-size: 12px;
+  color: var(--silver-400);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.paper-contrib {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #ffffff;
+  margin-top: auto;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.paper-contrib-label {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--silver-300);
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.paper-contrib-text {
+  color: #f4f4f5;
+}
+
+/* Glass Tables for Tech Stack & Specifications */
+.table-responsive {
+  overflow-x: auto;
+  margin: 22px 0;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: rgba(14, 14, 20, 0.65);
+  backdrop-filter: blur(16px);
+}
+
+.glass-table th, .glass-table td {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.glass-table th {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.glass-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Alert Callouts (Red for Caution/Warning, Green for Note/Tip) */
+.alert-callout {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  background: rgba(0, 240, 255, 0.035);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.alert-callout.alert-danger {
+  border-color: rgba(255, 0, 85, 0.45);
+  background: rgba(255, 0, 85, 0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 16px rgba(255, 0, 85, 0.15);
+}
+
+.alert-callout.alert-danger .alert-callout-title {
+  color: var(--red-neon);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+}
+
+.alert-callout.alert-success {
+  border-color: rgba(0, 255, 102, 0.45);
+  background: rgba(0, 255, 102, 0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 16px rgba(0, 255, 102, 0.15);
+}
+
+.alert-callout.alert-success .alert-callout-title {
+  color: var(--green-neon);
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.alert-callout-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan-neon);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   METHODOLOGY & ABOUT SECTIONS
+   ========================================================================== */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.method-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 20px;
+  background: rgba(14, 14, 20, 0.55);
+  backdrop-filter: blur(14px);
+  min-height: 220px;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.method-card:hover {
+  transform: translateY(-4px);
+  border-color: #ffffff;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.12);
+}
+
+.method-card span {
+  font-size: 11px;
+  color: var(--silver-300);
+  letter-spacing: 0.12em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.method-card h3 {
+  margin: 24px 0 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.method-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 12px;
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.about-card {
+  padding: 36px;
+}
+
+.about-card h2 {
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 16px 0;
+  color: #ffffff;
+}
+
+.about-card h2 span {
+  color: var(--text-muted);
+}
+
+.about-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.about-chips span {
+  font-size: 10px;
+  color: var(--silver-300);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.security-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.security-grid div {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.security-grid b {
+  display: block;
+  font-size: 12px;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.security-grid span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   MODAL & FLOWCHART INSPECTOR (SILVER BLACK WHITE)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  animation: fadeIn 0.25s var(--ease-smooth);
+}
+
+.modal {
+  width: min(1180px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border: 1px solid var(--panel-border-glow);
+  background: rgba(10, 10, 15, 0.95);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 35px 120px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.15);
+  animation: modalIn 0.35s var(--ease-smooth);
+  position: relative;
+  backdrop-filter: blur(24px);
+}
+
+.modal-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 30px;
+  border-bottom: 1px solid var(--line-strong);
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(16px);
+}
+
+.modal-kicker {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--silver-300);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.modal-title {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-top: 6px;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 0 25px rgba(255,255,255,0.25);
+}
+
+.modal-path {
+  color: var(--silver-400);
+  font-size: 11px;
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  word-break: break-all;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 22px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: scale(1.06);
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+/* Markdown Rendering */
+.md-wrap {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.md-wrap h1, .md-wrap h2, .md-wrap h3, .md-wrap h4 {
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.md-wrap h1 { font-size: 28px; margin: 24px 0 16px; }
+.md-wrap h2 { font-size: 22px; margin: 34px 0 16px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.md-wrap h3 { font-size: 18px; margin: 24px 0 12px; }
+.md-wrap p { margin: 12px 0; }
+
+.md-wrap code {
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid var(--line);
+}
+
+.md-wrap blockquote {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-left: 3px solid #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--silver-200);
+}
+
+.md-wrap ul, .md-wrap ol {
+  padding-left: 24px;
+  margin: 14px 0;
+}
+
+.md-wrap li {
+  margin: 6px 0;
+}
+
+.md-wrap a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ==========================================================================
+   FLOWCHART ENGINE & MERMAID STYLING
+   ========================================================================== */
+.flowchart-container {
+  margin: 24px 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: rgba(8, 8, 12, 0.9);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 25px rgba(255,255,255,0.06);
+}
+
+.flowchart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.flowchart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.flowchart-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0,0,0,0.5);
+  padding: 3px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+
+.fc-tab-btn {
+  padding: 5px 12px;
+  font-size: 10px;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--silver-400);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.fc-tab-btn.active {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(255,255,255,0.3);
+}
+
+.flowchart-view-area {
+  padding: 24px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 80%);
+}
+
+.raw-code-view-area {
+  padding: 18px;
+  overflow-x: auto;
+  display: none;
+  background: #030305;
+}
+
+.raw-code-view-area pre {
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: #d4d4d8;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Custom Visual Flowchart Nodes */
+.visual-flowchart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.v-node {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  transition: all 0.3s var(--ease-smooth);
+  position: relative;
+}
+
+.v-node:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.1);
+}
+
+.v-node-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.v-node-content b {
+  display: block;
+  font-size: 13px;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.v-node-content span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 2px;
+}
+
+.v-node-tag {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line);
+  color: var(--silver-300);
+  background: rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.v-connector-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--silver-500);
+  font-size: 14px;
+  height: 18px;
+  line-height: 1;
+}
+
+.v-decision {
+  border: 1px solid #ffffff;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  box-shadow: 0 0 25px rgba(255,255,255,0.1);
+}
+
+.v-branch-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.v-branch-card {
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--line-strong);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.25s ease;
+}
+
+.v-branch-card.danger {
+  border-color: rgba(255, 0, 85, 0.45);
+  background: rgba(255, 0, 85, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 0, 85, 0.15);
+}
+
+.v-branch-card.danger:hover {
+  border-color: var(--red-neon);
+  box-shadow: 0 8px 25px rgba(255, 0, 85, 0.25);
+}
+
+.v-branch-card.danger b {
+  color: var(--red-neon);
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.4);
+}
+
+.v-branch-card.safe {
+  border-color: rgba(0, 255, 102, 0.45);
+  background: rgba(0, 255, 102, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(0, 255, 102, 0.15);
+}
+
+.v-branch-card.safe:hover {
+  border-color: var(--green-neon);
+  box-shadow: 0 8px 25px rgba(0, 255, 102, 0.25);
+}
+
+.v-branch-card.safe b {
+  color: var(--green-neon);
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+}
+
+.v-branch-card b {
+  display: block;
+  font-size: 11px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.v-branch-card p {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mermaid-target {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.mermaid-target svg {
+  max-width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.7));
+}
+
+/* Footer Styling */
+footer {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid var(--line);
+  padding: 40px 0 50px;
+  color: var(--silver-400);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.06em;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-creators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  color: var(--silver-300);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.footer-creators a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+}
+
+.footer-creators a:hover {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.creator-dot {
+  color: var(--silver-600);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive queries */
+@media (max-width: 1120px) {
+  .hero-grid, .system-grid, .split-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .method-grid { grid-template-columns: repeat(3, 1fr); }
+  .metric-strip { grid-template-columns: repeat(2, 1fr); }
+  .archive-toolbar { grid-template-columns: 1fr 1fr; }
+  .archive-toolbar select:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 820px) {
+  .wrap { padding: 0 20px; }
+  .navlinks, .status-badge { display: none; }
+  .hero h1 { font-size: 52px; }
+  .method-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
+  .archive-toolbar { grid-template-columns: 1fr; }
+  .archive-toolbar select:last-child { grid-column: auto; }
+  .footer-row { flex-direction: column; text-align: center; }
+}
 </style>
 </head>
 <body>
+  <!-- Ambient High-Tech Video Background -->
+  <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+  <div class="bg-video-overlay" aria-hidden="true"></div>
+
   <div class="progress" id="progress" aria-hidden="true"></div>
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
   <div class="gridveil" aria-hidden="true"></div>
   <div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
+  <!-- Navigation Bar with Logo -->
   <header class="topbar">
     <div class="wrap nav">
-      <a href="#top" class="brand" aria-label="Hidden Research home">
-        <span class="brand-mark" aria-hidden="true"><span></span></span>
-        <span>HIDDEN RESEARCH</span>
+      <a href="#top" class="brand" aria-label="Hidden Eye Security home">
+        <div class="brand-logo-frame">
+          <img src="logo.jpg" alt="Hidden Eye Security Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-title">HIDDEN EYE</span>
+          <span class="brand-sub">SECURITY RESEARCH</span>
+        </div>
       </a>
       <nav class="navlinks" aria-label="Primary">
-        <a href="#system">System</a><a href="#archive">Archive</a><a href="#method">Method</a><a href="#about">About</a>
+        <a href="#system">System Map</a>
+        <a href="#archive">Archive & Flowcharts</a>
+        <a href="#method">Methodology</a>
+        <a href="#about">About</a>
       </nav>
       <div class="nav-actions">
-        <span class="status"><i></i> SOURCE LINKED</span>
-        <a class="nav-cta" href="https://github.com/Osxninja/cybersecurity-projects" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <button class="status-badge" id="voiceToggleBtn" type="button" style="cursor: pointer; border: 1px solid rgba(0, 255, 102, 0.45);" title="Replay 'Welcome to Hidden Eye' voice greeting"><i></i> 144 SPECS LIVE</button>
+        <button class="nav-cta" id="topReadmeBtn" type="button" style="background: rgba(0, 240, 255, 0.14); border-color: var(--cyan-neon); cursor: pointer;" title="Direct Access to README Specification">README Spec &rarr;</button>
+        <a class="nav-cta" href="https://github.com/Osxninja/cybersecurity-projects" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
       </div>
     </div>
   </header>
 
   <main id="top">
+    <!-- Hero Section with Hidden Eye Security Branding -->
     <section class="hero section-shell">
       <div class="wrap hero-grid">
-        <div class="hero-copy-block reveal">
-          <div class="eyebrow"><span class="eyebrow-line"></span><span>CYBERSECURITY RESEARCH ARCHIVE</span><span class="eyebrow-dot"></span><span>LIVE INDEX</span></div>
-          <h1>Study the system.<br><span class="hero-highlight">Find the failure.</span></h1>
-          <p class="hero-copy">A research-grade interface for a cybersecurity archive spanning web applications, enterprise networks, malware, embedded systems, cloud infrastructure, human security, cryptography, mobile, AI security, and DFIR.</p>
+        <div class="hero-copy-block">
+          <div class="hero-logo-banner">
+            <div class="hero-logo-wrap">
+              <img src="logo.jpg" alt="Hidden Eye Security" class="hero-main-logo">
+              <div class="hero-logo-glow"></div>
+            </div>
+            <div>
+              <div class="eyebrow" style="margin-bottom: 6px;">
+                <span class="eyebrow-dot"></span>
+                <span>&gt;_ HIDDEN EYE SECURITY ARCHIVE</span>
+              </div>
+              <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--silver-400); letter-spacing: 0.08em;">
+                OFFENSIVE & DEFENSIVE LOGIC PIPELINES
+              </div>
+            </div>
+          </div>
+
+          <h1>HIDDEN EYE<br><span class="hero-highlight">SECURITY</span></h1>
+          <p class="hero-copy">
+            Next-generation cybersecurity research console. Every vulnerability PoC, reverse engineering workflow, and cryptographic algorithm is converted into an interactive, visual logic flowchart with complete academic paper citations.
+          </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#archive">Explore the archive <span>↗</span></a>
-            <button class="btn" type="button" id="focusSearch">Search projects <span class="kbd">⌘ K</span></button>
+            <a class="btn btn-primary" href="#archive">Explore Flowcharts &rarr;</a>
+            <button class="btn" type="button" id="heroReadmeBtn" style="border-color: rgba(0, 240, 255, 0.5); background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 255, 102, 0.08)); font-weight: 700;"><span style="color: var(--cyan-neon);">[DIRECT ACCESS]</span> README &rarr;</button>
+            <button class="btn" type="button" id="focusSearch">Search Specs <span class="kbd">⌘ K</span></button>
+            <button class="btn btn-ghost" type="button" id="toggleVideoBtn" title="Toggle background video"><span>[VIDEO: ON]</span></button>
           </div>
           <div class="hero-tags" aria-label="Archive highlights">
-            <span>10 domains</span><span>125 advanced</span><span>19 foundations</span><span>144 indexed specs</span>
+            <span class="tag-green">[HIDDEN EYE CORE]</span>
+            <span>10 Domains</span>
+            <span class="tag-red">125 Advanced Specs</span>
+            <span class="tag-green">19 Foundations</span>
+            <span id="voiceStatusBadge" style="cursor: pointer; border-color: rgba(0, 240, 255, 0.4);" title="Click to hear voice greeting">[AUDIO: WELCOME TO HIDDEN EYE]</span>
           </div>
         </div>
 
-        <div class="research-console-wrap reveal">
+        <!-- Research Console Flowchart Visualization -->
+        <div class="research-console-wrap">
           <div class="console-glow" aria-hidden="true"></div>
-          <section class="console" id="console" aria-label="Research console">
-            <div class="console-top"><div class="window-dots"><i></i><i></i><i></i></div><span>research-console / live-index</span><b>RUNNING</b></div>
+          <section class="console" id="console" aria-label="Research logic flow">
+            <div class="console-top">
+              <div class="window-dots"><i></i><i></i><i></i></div>
+              <span>flowchart-engine / security-pipeline</span>
+              <b>ACTIVE</b>
+            </div>
             <div class="console-body">
-              <div class="console-line"><span class="prompt">01</span><span>$</span><span>initialize archive</span><em>ok</em></div>
-              <div class="console-line"><span class="prompt">02</span><span>$</span><span>enumerate domains --recursive</span><em>10</em></div>
-              <div class="console-line"><span class="prompt">03</span><span>$</span><span>index projects --source github</span><em>144</em></div>
-              <div class="console-block">
-                <div><span class="accent">research_loop</span> = [</div>
-                <div class="indent"><span>hypothesis</span> → <span>experiment</span> → <span>evidence</span></div>
-                <div class="indent"><span>analysis</span> → <span>findings</span> → <span>question</span></div>
-                <div>]</div>
+              <div class="hero-flowchart">
+                <div class="flow-step-box">
+                  <div class="flow-step-num">01</div>
+                  <div class="flow-step-title">HTTP Payload Ingestion</div>
+                  <div class="flow-step-desc mono">User Input / Headers</div>
+                </div>
+                <div class="flow-connector">↓</div>
+                <div class="flow-step-box">
+                  <div class="flow-step-num">02</div>
+                  <div class="flow-step-title">AST Syntax & Taint Analyzer</div>
+                  <div class="flow-step-desc mono">Parse Query Tree</div>
+                </div>
+                <div class="flow-connector">↓</div>
+                <div class="flow-branch">
+                  <div class="flow-branch-box danger">
+                    <b>[ANOMALY / DETECTED]</b>
+                    <span>Isolate & Alert SIEM</span>
+                  </div>
+                  <div class="flow-branch-box safe">
+                    <b>[INTEGRITY / VERIFIED]</b>
+                    <span>Sanitize & Execute</span>
+                  </div>
+                </div>
+                <div class="flow-connector">↓</div>
+                <div class="flow-step-box">
+                  <div class="flow-step-num">03</div>
+                  <div class="flow-step-title">Prepared Statement Execution</div>
+                  <div class="flow-step-desc mono">PostgreSQL Engine</div>
+                </div>
               </div>
-              <div class="console-line"><span class="prompt">04</span><span>$</span><span>find hidden assumptions</span><i class="cursor-blink">_</i></div>
-              <div class="console-divider"></div>
-              <div class="console-foot"><span>CONNECTED</span><span>EDGE / SYSTEM / EVIDENCE</span></div>
             </div>
           </section>
-          <div class="orbit orbit-1" aria-hidden="true"><i></i></div>
-          <div class="orbit orbit-2" aria-hidden="true"><i></i></div>
         </div>
       </div>
     </section>
 
+    <!-- System Map Section -->
     <section class="section-shell compact" id="system">
       <div class="wrap">
-        <div class="section-head reveal"><div><div class="kicker">01 / SYSTEM MAP</div><h2>One archive.<br><span>Multiple attack surfaces.</span></h2></div><p>The source repository is organized as a connected research landscape. The interface keeps that structure visible while making the archive much easier to interrogate.</p></div>
-        <div class="metric-strip reveal">
-          <article><strong data-counter="144">144</strong><span>source project specs</span></article>
-          <article><strong data-counter="10">10</strong><span>research domains</span></article>
-          <article><strong data-counter="125">125</strong><span>advanced projects</span></article>
-          <article><strong data-counter="19">19</strong><span>foundation projects</span></article>
+        <div class="section-head">
+          <div>
+            <div class="kicker">01 / SYSTEM MAP</div>
+            <h2>One archive.<br><span>Multiple attack surfaces.</span></h2>
+          </div>
+          <p>
+            The entire repository structure is indexed with interactive diagrams and visual execution logic, making complex vulnerabilities intuitive to understand.
+          </p>
+        </div>
+
+        <div class="metric-strip">
+          <article><strong data-counter="144">144</strong><span>Project Flowcharts</span></article>
+          <article><strong data-counter="10">10</strong><span>Research Domains</span></article>
+          <article><strong data-counter="125">125</strong><span>Advanced Specs</span></article>
+          <article><strong data-counter="19">19</strong><span>Foundations</span></article>
         </div>
 
         <div class="system-grid">
-          <div class="panel topology reveal">
-            <div class="panel-label">RESEARCH TOPOLOGY</div>
+          <div class="panel topology">
+            <div class="panel-label">RESEARCH TOPOLOGY // FLOW NETWORK</div>
             <svg class="topology-svg" viewBox="0 0 900 500" preserveAspectRatio="none" aria-hidden="true">
-              <defs><linearGradient id="lineGlow" x1="0" x2="1"><stop offset="0" stop-color="#6d7cff" stop-opacity=".04"/><stop offset=".5" stop-color="#8de7ff" stop-opacity=".55"/><stop offset="1" stop-color="#6d7cff" stop-opacity=".04"/></linearGradient></defs>
-              <path d="M155 112 L440 244 L730 120 M155 382 L440 244 L742 378 M155 112 L155 382 M730 120 L742 378" stroke="url(#lineGlow)" stroke-width="2" fill="none"/>
-              <circle cx="155" cy="112" r="3" fill="#91a5ff"/><circle cx="440" cy="244" r="4" fill="#a8f4ff"/><circle cx="730" cy="120" r="3" fill="#91a5ff"/><circle cx="742" cy="378" r="3" fill="#91a5ff"/><circle cx="155" cy="382" r="3" fill="#91a5ff"/>
+              <defs>
+                <linearGradient id="silverLine" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+                  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.75"/>
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15"/>
+                </linearGradient>
+              </defs>
+              <path d="M155 112 L440 244 L730 120 M155 382 L440 244 L742 378 M155 112 L155 382 M730 120 L742 378" stroke="url(#silverLine)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+              <circle cx="155" cy="112" r="4" fill="#ffffff"/>
+              <circle cx="440" cy="244" r="6" fill="#ffffff"/>
+              <circle cx="730" cy="120" r="4" fill="#ffffff"/>
+              <circle cx="742" cy="378" r="4" fill="#ffffff"/>
+              <circle cx="155" cy="382" r="4" fill="#ffffff"/>
             </svg>
-            <div class="topo-node n1"><b>SYSTEMS</b><span>runtime · binary · memory</span></div>
-            <div class="topo-node n2"><b>NETWORKS</b><span>protocol · traffic · trust</span></div>
-            <div class="topo-node n3"><b>HUMAN</b><span>identity · behavior · OSINT</span></div>
+            <div class="topo-node n1"><b>01 SYSTEMS</b><span>runtime · binary · memory</span></div>
+            <div class="topo-node n2"><b>02 NETWORKS</b><span>protocol · traffic · trust</span></div>
+            <div class="topo-node n3"><b>03 HUMAN</b><span>identity · behavior · OSINT</span></div>
             <div class="topo-node n4 center-node"><b>SECURITY RESEARCH</b><span>attack · analysis · defense</span></div>
-            <div class="topo-node n5"><b>COMPUTATION</b><span>AI · automation · adversarial</span></div>
+            <div class="topo-node n5"><b>04 COMPUTATION</b><span>AI · automation · adversarial</span></div>
           </div>
-          <aside class="panel thesis reveal">
-            <div class="panel-label">THE THESIS</div>
+
+          <aside class="panel thesis">
+            <div class="panel-label">THE CORE THESIS</div>
             <blockquote>“The attack surface is larger than the application.”</blockquote>
-            <p>Web security becomes cloud security. Cloud becomes identity. Identity becomes enterprise networks. Detection becomes a data problem. The archive is strongest when those connections stay visible.</p>
-            <div class="signal-list"><div><span>01</span><b>Observe</b><small>read the system</small></div><div><span>02</span><b>Break</b><small>test the boundary</small></div><div><span>03</span><b>Explain</b><small>document the evidence</small></div></div>
+            <p>
+              When code is viewed as static text, subtle bypasses get lost. By mapping algorithms and attack vectors into clear decision flowcharts, detection points become immediate and actionable.
+            </p>
+            <div class="signal-list">
+              <div><span>01</span><b>Observe</b><small>trace inputs & tokens</small></div>
+              <div><span>02</span><b>Break</b><small>probe boundary conditions</small></div>
+              <div><span>03</span><b>Model</b><small>visualize execution flowchart</small></div>
+            </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <!-- Project Archive Section -->
     <section class="section-shell" id="archive">
       <div class="wrap">
-        <div class="section-head reveal"><div><div class="kicker">02 / PROJECT ARCHIVE</div><h2>Search the lab.</h2></div><p>Project cards resolve to the repository. Open a dossier to inspect its real specification, architecture, references, implementation plan, tooling, expected results, and learning outcomes.</p></div>
-        <div class="archive-shell panel reveal">
-          <div class="archive-toolbar">
-            <label class="search-field"><span>⌕</span><input id="search" type="search" placeholder="Search projects, domains, technologies…" autocomplete="off" spellcheck="false" aria-label="Search projects"></label>
-            <select id="domainSelect" aria-label="Filter by domain"><option value="all">All domains</option></select>
-            <select id="sortSelect" aria-label="Sort projects"><option value="number">Original order</option><option value="title">Title A–Z</option></select>
+        <div class="section-head">
+          <div>
+            <div class="kicker">02 / INTERACTIVE FLOWCHART ARCHIVE</div>
+            <h2>Search the lab.</h2>
           </div>
+          <p>
+            Select any project to open its comprehensive research dossier with auto-generated <strong>Logic Flowcharts</strong>, <strong>Research Paper Cards</strong>, and step-by-step technical analysis.
+          </p>
+        </div>
+
+        <div class="archive-shell panel">
+          <div class="archive-toolbar">
+            <label class="search-field">
+              <span>⌕</span>
+              <input id="search" type="search" placeholder="Search projects, techniques, tools, keywords…" autocomplete="off" spellcheck="false" aria-label="Search projects">
+            </label>
+            <select id="domainSelect" aria-label="Filter by domain">
+              <option value="all">All domains</option>
+            </select>
+            <select id="sortSelect" aria-label="Sort projects">
+              <option value="number">Original Project Order</option>
+              <option value="title">Title A–Z</option>
+            </select>
+          </div>
+
           <div class="domain-bar" id="domainBar" aria-label="Domain filters">
-<button type="button" class="chip active" data-domain="all">ALL</button>
-<button type="button" class="chip" data-domain="web">WEB</button>
-<button type="button" class="chip" data-domain="network">NETWORK</button>
-<button type="button" class="chip" data-domain="malware">MALWARE / RE</button>
-<button type="button" class="chip" data-domain="iot">IoT / EMBEDDED</button>
-<button type="button" class="chip" data-domain="cloud">CLOUD</button>
-<button type="button" class="chip" data-domain="social">HUMAN</button>
-<button type="button" class="chip" data-domain="crypto">CRYPTO</button>
-<button type="button" class="chip" data-domain="mobile">MOBILE</button>
-<button type="button" class="chip" data-domain="ai">AI SECURITY</button>
-<button type="button" class="chip" data-domain="dfir">DFIR</button>
-<button type="button" class="chip" data-domain="basic">FOUNDATIONS</button></div>
-          <div class="results-meta"><span id="resultCount">144 indexed specs</span><span><kbd class="kbd">⌘ K</kbd> search</span></div>
-          <div id="projectGrid" class="project-grid" aria-live="polite"><a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/01%20-%20Web%20Application%20Attacks/001%20-%20Automated%20SQL%20Injection%20Detection%20&%20Prevention%20System.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 001</span><span class="project-domain">WEB</span></div><h3>Automated SQL Injection Detection & Prevention System</h3><p>Web application attack research</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/01%20-%20Web%20Application%20Attacks/004%20-%20Server-Side%20Request%20Forgery%20(SSRF)%20Scanner.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 004</span><span class="project-domain">WEB</span></div><h3>Server-Side Request Forgery (SSRF) Scanner</h3><p>Cloud-aware SSRF assessment and OOB detection</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/02%20-%20Network%20Penetration%20Testing/016%20-%20Automated%20Network%20Reconnaissance%20Framework.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 016</span><span class="project-domain">NETWORK</span></div><h3>Automated Network Reconnaissance Framework</h3><p>Enterprise reconnaissance and service discovery</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/02%20-%20Network%20Penetration%20Testing/025%20-%20Active%20Directory%20Penetration%20Testing%20Automation.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 025</span><span class="project-domain">NETWORK</span></div><h3>Active Directory Penetration Testing Automation</h3><p>Kerberos, LDAP and attack-path research</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/03%20-%20Malware%20Analysis%20&%20Reverse%20Engineering/031%20-%20Automated%20Malware%20Classification%20using%20CNN%20on%20PE%20Headers.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 031</span><span class="project-domain">MALWARE / RE</span></div><h3>Automated Malware Classification using CNN on PE Headers</h3><p>Machine-learning driven malware triage</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/03%20-%20Malware%20Analysis%20&%20Reverse%20Engineering/032%20-%20Ransomware%20Behavior%20Analysis%20Sandbox.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 032</span><span class="project-domain">MALWARE / RE</span></div><h3>Ransomware Behavior Analysis Sandbox</h3><p>Behavioral detonation and observation</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/04%20-%20IoT%20&%20Embedded%20Security/046%20-%20IoT%20Botnet%20Detection%20using%20Network%20Flow%20Analysis.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 046</span><span class="project-domain">IoT / EMBEDDED</span></div><h3>IoT Botnet Detection using Network Flow Analysis</h3><p>Network-flow detection for connected devices</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/04%20-%20IoT%20&%20Embedded%20Security/053%20-%20Industrial%20SCADA-ICS%20Security%20Assessment%20Platform.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 053</span><span class="project-domain">IoT / EMBEDDED</span></div><h3>Industrial SCADA-ICS Security Assessment Platform</h3><p>OT visibility and industrial security testing</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/05%20-%20Cloud%20&%20Container%20Security/059%20-%20AWS%20S3%20Bucket%20Misconfiguration%20Scanner.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 059</span><span class="project-domain">CLOUD</span></div><h3>AWS S3 Bucket Misconfiguration Scanner</h3><p>Cloud storage posture assessment</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/05%20-%20Cloud%20&%20Container%20Security/060%20-%20Kubernetes%20RBAC%20Misconfiguration%20Detector.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 060</span><span class="project-domain">CLOUD</span></div><h3>Kubernetes RBAC Misconfiguration Detector</h3><p>Container orchestration authorization analysis</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/07%20-%20Cryptography%20&%20Steganography/083%20-%20Image%20Steganography%20Detection%20using%20CNN.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 083</span><span class="project-domain">CRYPTO</span></div><h3>Image Steganography Detection using CNN</h3><p>Covert-channel research with deep learning</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/09%20-%20AI%20&%20ML%20in%20Offensive%20Security/106%20-%20LLM%20Prompt%20Injection%20Attack%20&%20Defense%20Toolkit.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 106</span><span class="project-domain">AI SECURITY</span></div><h3>LLM Prompt Injection Attack & Defense Toolkit</h3><p>Adversarial research for language-model systems</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/10%20-%20Forensics%20&%20Incident%20Response/114%20-%20Disk%20Forensics%20Image%20Analyzer%20with%20Timeline%20Generation.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 114</span><span class="project-domain">DFIR</span></div><h3>Disk Forensics Image Analyzer with Timeline Generation</h3><p>Evidence timeline reconstruction</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a>
-<a class="project" href="https://github.com/Osxninja/cybersecurity-projects/blob/main/10%20-%20Forensics%20&%20Incident%20Response/120%20-%20SIEM%20Log%20Correlation%20&%20Alert%20Prioritization%20Engine.md" target="_blank" rel="noopener noreferrer"><div class="project-top"><span class="project-num">PROJECT 120</span><span class="project-domain">DFIR</span></div><h3>SIEM Log Correlation & Alert Prioritization Engine</h3><p>Detection engineering and alert triage</p><div class="project-foot"><span>RESEARCH ARCHIVE</span><span>OPEN ON GITHUB ↗</span></div></a></div>
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="results-meta">
+            <span id="resultCount">144 indexed specs // Flowcharts enabled</span>
+            <span><kbd class="kbd">⌘ K</kbd> to search</span>
+          </div>
+
+          <div id="projectGrid" class="project-grid" aria-live="polite">
+            <!-- Project Cards Rendered by JS -->
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Methodology Section -->
     <section class="section-shell compact" id="method">
       <div class="wrap">
-        <div class="section-head reveal"><div><div class="kicker">03 / METHODOLOGY</div><h2>Build. Break.<br><span>Explain.</span></h2></div><p>The README emphasizes implementation, failure, debugging, repetition, and understanding over collecting finished techniques. The site follows the same idea.</p></div>
+        <div class="section-head">
+          <div>
+            <div class="kicker">03 / METHODOLOGY</div>
+            <h2>Model. Break.<br><span>Verify.</span></h2>
+          </div>
+          <p>
+            Security is a systematic loop. We transition from theoretical concepts to execution pipelines and defensive verification.
+          </p>
+        </div>
         <div class="method-grid">
-          <article class="method-card reveal"><span>01</span><h3>Foundation</h3><p>Programming, Linux, networking and security fundamentals establish the mental model.</p></article>
-          <article class="method-card reveal"><span>02</span><h3>Application</h3><p>Web, network, cloud and mobile systems where assumptions meet real interfaces.</p></article>
-          <article class="method-card reveal"><span>03</span><h3>Specialization</h3><p>Malware, reverse engineering, IoT, cryptography and DFIR push the depth further.</p></article>
-          <article class="method-card reveal"><span>04</span><h3>Experiment</h3><p>Automate tests, measure behavior, build detection and probe adversarial edge cases.</p></article>
-          <article class="method-card reveal"><span>05</span><h3>Research</h3><p>Hypothesis → experiment → evidence → analysis → findings → new question.</p></article>
+          <article class="method-card"><span>01</span><h3>Foundation</h3><p>Protocols, Linux internals, network stacks, and cryptographic primitives.</p></article>
+          <article class="method-card"><span>02</span><h3>Application</h3><p>Web APIs, OAuth flows, cloud services, and real-world microservices.</p></article>
+          <article class="method-card"><span>03</span><h3>Specialization</h3><p>Malware binaries, IoT firmware, reverse engineering, and low-level memory.</p></article>
+          <article class="method-card"><span>04</span><h3>Flowcharting</h3><p>Converting multi-step exploit chains and defensive rules into visual logic trees.</p></article>
+          <article class="method-card"><span>05</span><h3>Verification</h3><p>Automated SIEM detection, fuzzing, behavioral sandboxing, and remediation.</p></article>
         </div>
       </div>
     </section>
 
+    <!-- About Section -->
     <section class="section-shell compact" id="about">
       <div class="wrap split-grid">
-        <article class="panel about-card reveal"><div class="panel-label">04 / ARCHIVE DNA</div><h2>Not a checklist.<br><span>A lab notebook.</span></h2><p>The repository is framed as a serious cybersecurity project archive. This interface keeps the original technical material intact while turning it into something you can navigate like a research instrument.</p><div class="about-chips"><span>papers + docs</span><span>controlled experiments</span><span>evidence + findings</span></div></article>
-        <article class="panel about-card reveal"><div class="panel-label">05 / SECURITY POSTURE</div><h2>Fast by design.<br><span>Careful by default.</span></h2><p>The frontend avoids unnecessary libraries, keeps motion on compositor-friendly properties, pauses expensive animation when hidden, and sanitizes source links before rendering repository content.</p><div class="security-grid"><div><b>CSP</b><span>strict browser policy</span></div><div><b>XSS</b><span>escaped source rendering</span></div><div><b>UX</b><span>reduced-motion support</span></div><div><b>PERF</b><span>visibility-aware animation</span></div></div></article>
+        <article class="panel about-card">
+          <div class="panel-label">04 / ARCHIVE DNA</div>
+          <h2>Silver & Monochrome.<br><span>Precision engineering.</span></h2>
+          <p>
+            Designed for researchers and security engineers. Raw code blocks are enhanced with interactive flowchart models, making algorithmic vulnerabilities transparent at first glance.
+          </p>
+          <div class="about-chips">
+            <span>translucent glassmorphism</span>
+            <span>interactive flowcharts</span>
+            <span>research paper cards</span>
+            <span>smooth silver glow</span>
+          </div>
+        </article>
+
+        <article class="panel about-card">
+          <div class="panel-label">05 / RESEARCH POSTURE</div>
+          <h2>Fast by design.<br><span>Offline resilient.</span></h2>
+          <p>
+            Zero unnecessary bloat. Powered by modern web standards, native SVG vector graphics, client-side flowchart compilation, and fast search indexing.
+          </p>
+          <div class="security-grid">
+            <div><b>FLOW ENGINE</b><span>Code to Flowchart Parser</span></div>
+            <div><b>PAPER CARDS</b><span>Structured Citations</span></div>
+            <div><b>MONOCHROME</b><span>Silver Titanium Theme</span></div>
+            <div><b>PERFORMANCE</b><span>Compositor Acceleration</span></div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-  <div class="wrap footer-row">
-    <span>HIDDEN RESEARCH // OSXNINJA / CYBERSECURITY-PROJECTS</span>
-    <span>RESEARCH IS A PROCESS, NOT A DECORATION.</span>
-  </div>
-  <div class="wrap footer-creators" aria-label="Site creators">
-    <span>MADE BY</span>
-    <a href="https://tryhackme.com/p/APT.Hardik" target="_blank" rel="noopener noreferrer">AIZEN ↗</a>
-    <span class="creator-dot">&amp;</span>
-    <a href="https://tryhackme.com/p/MemphisCult" target="_blank" rel="noopener noreferrer">9MM_MEMPHIS_CULT ↗</a>
-  </div>
-</footer>
+    <div class="wrap footer-row">
+      <span>HIDDEN RESEARCH // OSXNINJA / CYBERSECURITY-PROJECTS</span>
+      <span>MONOCHROME RESEARCH ARCHIVE & FLOWCHARTS</span>
+    </div>
+    <div class="wrap footer-creators" aria-label="Site creators">
+      <span>CREATED BY</span>
+      <a href="https://tryhackme.com/p/APT.Hardik" target="_blank" rel="noopener noreferrer">AIZEN ↗</a>
+      <span class="creator-dot">&amp;</span>
+      <a href="https://tryhackme.com/p/MemphisCult" target="_blank" rel="noopener noreferrer">9MM_MEMPHIS_CULT ↗</a>
+    </div>
+  </footer>
 
+  <!-- Modal Container for Project Dossiers -->
   <div id="modalRoot"></div>
-  <script defer>
-const REPO = 'https://github.com/Osxninja/cybersecurity-projects';
-const RAW = 'https://raw.githubusercontent.com/Osxninja/cybersecurity-projects/main/';
-const TREE_API = 'https://api.github.com/repos/Osxninja/cybersecurity-projects/git/trees/main?recursive=1';
-const DOMAINS = [
-  ['web','01','Web Application Attacks','WEB'],['network','02','Network Penetration Testing','NETWORK'],['malware','03','Malware Analysis & Reverse Engineering','MALWARE / RE'],['iot','04','IoT & Embedded Security','IoT / EMBEDDED'],['cloud','05','Cloud & Container Security','CLOUD'],['social','06','Social Engineering & Phishing','HUMAN'],['crypto','07','Cryptography & Steganography','CRYPTO'],['mobile','08','Mobile Security','MOBILE'],['ai','09','AI & ML in Offensive Security','AI SECURITY'],['dfir','10','Forensics & Incident Response','DFIR'],['basic','00','Foundational Projects','FOUNDATIONS']
-];
-const RANGE = {web:[1,15],network:[16,30],malware:[31,45],iot:[46,58],cloud:[59,70],social:[71,82],crypto:[83,92],mobile:[93,102],ai:[103,113],dfir:[114,125],basic:[126,145]};
-const FALLBACK_NAMES = ["Automated SQL Injection Detection & Prevention System", "XSS Payload Generator with Context-Aware Encoding", "CSRF Token Analyzer & Bypass Framework", "Server-Side Request Forgery (SSRF) Scanner", "API Security Testing Automation Platform", "JWT Token Vulnerability Assessment Tool", "Web Application Firewall (WAF) Bypass Techniques Analyzer", "Broken Access Control Detection Engine", "GraphQL API Security Audit Framework", "WebSocket Security Testing Suite", "Browser Extension Security Analyzer", "Content Security Policy (CSP) Bypass Research Tool", "Race Condition Vulnerability Detector for Web Apps", "Prototype Pollution Attack Detection System", "OAuth 2.0 Flow Vulnerability Scanner", "Automated Network Reconnaissance Framework", "ARP Spoofing Detection & Prevention System", "DNS Tunneling Detection Using ML Classifiers", "Wireless Network WPA3 Security Assessment Tool", "Man-in-the-Middle Attack Detection for TLS-SSL", "Network Traffic Anomaly Detection using Autoencoders", "BGP Hijacking Simulation & Detection Framework", "Port Knocking Authentication System with Stealth Mode", "VPN Tunnel Leak Detection Analyzer", "Active Directory Penetration Testing Automation", "SMB-CIFS Vulnerability Scanner & Exploit Chain Builder", "Zero-Trust Network Architecture Validator", "IPv6 Security Assessment & Attack Simulation Tool", "SDN Controller Security Testing Framework", "Honeypot Deployment & Attack Analysis Platform", "Automated Malware Classification using CNN on PE Headers", "Ransomware Behavior Analysis Sandbox", "Fileless Malware Detection using Memory Forensics", "Dynamic Malware Analysis Platform with API Call Tracing", "Polymorphic Malware Detection using Behavioral Signatures", "Android APK Static Analysis & Vulnerability Scanner", "ELF Binary Exploit Detection for Linux Systems", "Rootkit Detection Framework using System Call Monitoring", "Malware Unpacking & Deobfuscation Automation Tool", "PE File Anomaly Detection using Random Forest", "Macro-based Malware Detector for Office Documents", "Firmware Backdoor Detection System", "Cryptojacking Script Detection in Web Browsers", "Adversarial Example Generator for Evading ML-based IDS", "Living-off-the-Land Binary (LOLBin) Abuse Detector", "IoT Botnet Detection using Network Flow Analysis", "Smart Home Device Vulnerability Assessment Framework", "CAN Bus Intrusion Detection for Connected Vehicles", "MQTT Protocol Security Testing Tool", "Zigbee & Z-Wave Protocol Attack Simulator", "IoT Firmware Extraction & Analysis Pipeline", "BLE Sniffing & MITM Attack Tool", "Industrial SCADA-ICS Security Assessment Platform", "IoT Device Default Credential Scanner", "Smart Grid False Data Injection Attack Simulator", "LoRaWAN Security Audit Framework", "Embedded Device Side-Channel Attack Demonstrator", "OT Network Segmentation Validator", "AWS S3 Bucket Misconfiguration Scanner", "Kubernetes RBAC Misconfiguration Detector", "Docker Container Escape Detection System", "Cloud IAM Policy Over-Privilege Analyzer", "Serverless Function Injection Attack Simulator", "CI-CD Pipeline Security Audit Tool", "Multi-Cloud Security Posture Assessment Framework", "Container Image Vulnerability Scanner Comparison", "Cloud Storage Data Exfiltration Detection System", "Terraform IaC Security Linter & Policy Enforcer", "Azure AD Attack Path Analyzer", "Cloud API Key Leak Detection in Public Repos", "AI-Powered Spear Phishing Email Generator & Tester", "Phishing URL Detection using Deep Learning", "Deepfake Voice Detection for Vishing Prevention", "QR Code Phishing (Quishing) Detection System", "Social Media OSINT Automation Framework", "USB Rubber Ducky Payload Analyzer & Detector", "Email Header Forensics & Spoofing Detection Tool", "Browser-in-the-Browser (BitB) Attack Detection", "Smishing (SMS Phishing) Detection using NLP", "Credential Harvesting Prevention System", "Watering Hole Attack Detection Framework", "Security Awareness Training Gamification Platform", "Image Steganography Detection using CNN", "Post-Quantum Cryptography Implementation Benchmark", "Blockchain-Based Secure Document Verification System", "Homomorphic Encryption Performance Testing Framework", "SSL-TLS Certificate Transparency Monitor", "Password Cracking Optimization using Rainbow Tables & GPU", "Zero-Knowledge Proof Authentication System", "Quantum Key Distribution (QKD) Simulation", "Audio Steganography Detection System", "Secure Multi-Party Computation Protocol Implementation", "Android Malware Detection using Permissions Analysis", "iOS App Binary Analysis & Vulnerability Scanner", "Mobile App API Traffic Interception Framework", "SIM Swapping Attack Detection System", "Mobile Banking App Security Assessment Tool", "Android Intent Hijacking Detection System", "Mobile Device Management (MDM) Bypass Analyzer", "SS7 Diameter Protocol Vulnerability Demonstrator", "Mobile App Repackaging & Tamper Detection", "Progressive Web App (PWA) Security Testing Suite", "Adversarial Machine Learning Attack on IDS-IPS", "GAN-based Malware Sample Generator", "AI-Powered Automated Exploit Generation Framework", "LLM Prompt Injection Attack & Defense Toolkit", "Reinforcement Learning-based Fuzzing Engine", "ML Model Poisoning Attack Simulator", "AI-Driven Vulnerability Prioritization System", "Deepfake Generation & Detection for Red Team Ops", "NLP for Threat Intelligence Extraction", "Federated Learning Security Attack Simulator", "Automated Penetration Testing Agent using LLM", "Disk Forensics Image Analyzer with Timeline Generation", "Memory Dump Analysis Tool for Incident Response", "Network Packet Capture Forensics Dashboard", "Email Phishing Forensics Investigation Platform", "Browser Artifact Extraction & Analysis Tool", "Ransomware Payment Blockchain Tracing System", "SIEM Log Correlation & Alert Prioritization Engine", "Digital Evidence Chain of Custody Blockchain System", "Windows Registry Forensics Automation Tool", "Cloud Instance Forensics Snapshot Analyzer", "Malware C2 Traffic Detector", "Automated Incident Response Playbook Executor", "Simple File Integrity Monitor (FIM) using SHA-256", "Basic Network Port Scanner & Service Banner Grabbing Tool", "Simple ARP Poisoning Detection Script", "Basic Password Strength Checker and Hash Cracker", "Simple Web URL Phishing Detector using Domain Heuristics", "Basic Packet Sniffer and HTTP Header Analyzer", "Simple LSB Image Steganography Encoder & Decoder", "Basic Directory Bruteforce Scanner for Web Servers", "Simple Keylogger Detection & Process Monitoring Tool", "Basic SQL Injection Vulnerability Test Script", "Simple Encrypted Password Manager CLI Tool", "Basic Log File Anomaly Scanner using Regex", "Simple DNS Lookup & Subdomain Finder Tool", "Basic Cross-Site Scripting (XSS) Reflected Scanner", "Simple System Wi-Fi Saved Passwords Extractor", "Basic Encrypted Chat Application using Sockets", "Simple HTTP Security Headers Checker", "Simple Network Ping Sweep and Host Discovery Tool", "Basic USB Drive Auto-Run Infection Prevention Script"];
-const state = {projects:[], domain:'all', query:'', sort:'number', modal:null};
-let sourceAbort = null;
 
-const $ = (s,r=document) => r.querySelector(s);
-const $$ = (s,r=document) => [...r.querySelectorAll(s)];
-const slugNum = n => String(n).padStart(3,'0');
-const domainFor = n => DOMAINS.find(d => n >= RANGE[d[0]][0] && n <= RANGE[d[0]][1]) || DOMAINS[0];
-const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-const safeExternalUrl = raw => {
-  try { const u = new URL(raw, location.href); return (u.protocol === 'https:' || u.protocol === 'http:') ? u.href : null; }
-  catch { return null; }
-};
-const sourceUrlFor = path => RAW + path.split('/').map(encodeURIComponent).join('/');
-const githubPathUrl = path => REPO + '/blob/main/' + path.split('/').map(encodeURIComponent).join('/');
-
-function createFallback() {
-  return FALLBACK_NAMES.map((title, i) => {
-    const id = i < 125 ? i + 1 : 126 + (i - 125);
-    const d = domainFor(id);
-    const path = id <= 125 ? `${d[1]} - ${d[2]}/${slugNum(id)} - ${title}.md` : `basic project/${String(id-125).padStart(3,'0')} - ${title}.md`;
-    return {id,title,path,domain:d[0],domainName:d[2],type:id<=125?'advanced':'foundation',summary:id<=125?'Open the research dossier for the full project specification, architecture, references, implementation phases and expected results.':'Practical cybersecurity foundation project from the basics track.'};
-  });
-}
-
-async function fetchJson(url, opts={}) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
-  try {
-    const r = await fetch(url, {...opts, signal: controller.signal, headers: {Accept:'application/vnd.github+json', ...(opts.headers||{})}});
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.json();
-  } finally { clearTimeout(timer); }
-}
-
-async function loadTree() {
-  try {
-    const data = await fetchJson(TREE_API);
-    const files = (data.tree || []).filter(x => x.type === 'blob' && x.path.toLowerCase().endsWith('.md'));
-    const projects = files.map(x => {
-      const advanced = x.path.match(/^(\d{2})\s*-\s*([^/]+)\/([0-9]{3})\s*-\s*(.+)\.md$/i);
-      const basic = x.path.match(/^basic project\/([0-9]{2})\s*-\s*(.+)\.md$/i);
-      if (advanced) { const id = Number(advanced[3]); const d = domainFor(id); return {id,title:advanced[4],path:x.path,domain:d[0],domainName:d[2],type:'advanced',summary:'Open the research dossier for the full problem statement, references, architecture, implementation phases, tooling, expected results, and learning outcomes.'}; }
-      if (basic) { const id = 125 + Number(basic[1]); const d = DOMAINS.find(v => v[0] === 'basic'); return {id,title:basic[2],path:x.path,domain:'basic',domainName:d[2],type:'foundation',summary:'Practical cybersecurity foundation project from the repository basics track.'}; }
-      return null;
-    }).filter(Boolean).sort((a,b)=>a.id-b.id);
-    state.projects = projects.length ? projects : createFallback();
-  } catch (err) {
-    state.projects = createFallback();
-  }
-  renderDomainControls();
-  renderProjects();
-  updateLiveState();
-}
-
-function renderDomainControls() {
-  const bar = $('#domainBar');
-  bar.replaceChildren();
-  const addChip = (label, value) => {
-    const b = document.createElement('button');
-    b.type='button'; b.className='chip'; b.dataset.domain=value; b.textContent=label;
-    b.addEventListener('click', () => setDomain(value)); bar.appendChild(b);
-  };
-  addChip('ALL','all');
-  DOMAINS.filter(d=>d[0] !== 'basic').forEach(d => addChip(d[3], d[0]));
-  addChip('FOUNDATIONS','basic');
-  const sel = $('#domainSelect');
-  sel.replaceChildren(new Option('All domains','all'));
-  DOMAINS.forEach(d => sel.appendChild(new Option(d[2], d[0])));
-  syncDomainUi();
-}
-function syncDomainUi() { $('#domainSelect').value=state.domain; $$('#domainBar .chip').forEach(b=>b.classList.toggle('active', b.dataset.domain===state.domain)); }
-function setDomain(v) { state.domain=v; syncDomainUi(); renderProjects(); }
-function filtered() {
-  let a = state.projects.filter(p => state.domain === 'all' || p.domain === state.domain);
-  const q = state.query.trim().toLowerCase();
-  if (q) a = a.filter(p => `${p.title} ${p.domainName} ${p.type}`.toLowerCase().includes(q));
-  if (state.sort==='title') a.sort((x,y)=>x.title.localeCompare(y.title)); else a.sort((x,y)=>x.id-y.id);
-  return a;
-}
-function renderProjects() {
-  const grid = $('#projectGrid'); const arr=filtered();
-  $('#resultCount').textContent = `${arr.length} ${arr.length===1?'RESULT':'RESULTS'} // SOURCE INDEX`;
-  grid.replaceChildren();
-  if (!arr.length) {
-    const empty=document.createElement('div'); empty.className='empty'; empty.textContent='No matching project in the current slice of the archive.'; grid.appendChild(empty); return;
-  }
-  const frag=document.createDocumentFragment();
-  arr.forEach(p => {
-    const card = projectCard(p);
-    card.classList.add('is-entering');
-    frag.appendChild(card);
-  });
-  grid.appendChild(frag);
-}
-function projectCard(p) {
-  const el=document.createElement('article'); el.className='project'; el.tabIndex=0; el.setAttribute('role','button');
-  const num = p.type==='advanced' ? `PROJECT ${slugNum(p.id)}` : `FOUNDATION ${String(p.id-125).padStart(2,'0')}`;
-  el.innerHTML = `<div class="project-top"><span class="project-num">${escapeHtml(num)}</span><span class="project-domain">${escapeHtml(domainFor(p.id)[3])}</span></div><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.summary)}</p><div class="project-foot"><span>${p.type==='advanced'?'ADVANCED RESEARCH':'FOUNDATION'}</span><span>OPEN DOSSIER ↗</span></div>`;
-  const open=()=>openProject(p.id); el.addEventListener('click',open); el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}}); return el;
-}
-
-function markdownToHtml(md) {
-  let s = escapeHtml(md).replace(/^---[\s\S]*?---\s*/,'');
-  s = s.replace(/^###### (.*)$/gm,'<h6>$1</h6>').replace(/^##### (.*)$/gm,'<h5>$1</h5>').replace(/^#### (.*)$/gm,'<h4>$1</h4>').replace(/^### (.*)$/gm,'<h3>$1</h3>').replace(/^## (.*)$/gm,'<h2>$1</h2>').replace(/^# (.*)$/gm,'<h1>$1</h1>');
-  s = s.replace(/```[\w-]*\n?([\s\S]*?)```/g,(m,c)=>`<pre><code>${c.replace(/^\n/,'')}</code></pre>`);
-  s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
-  s = s.replace(/^> (.*)$/gm,'<blockquote>$1</blockquote>');
-  s = s.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>');
-  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,(m,text,url)=>{const safe=safeExternalUrl(url); return safe?`<a href="${escapeHtml(safe)}" target="_blank" rel="noopener noreferrer">${text}</a>`:`${text}`;});
-  const lines=s.split('\n'), out=[]; let inUl=false;
-  for(const line of lines) {
-    if(/^[-*] /.test(line)) { if(!inUl){out.push('<ul>');inUl=true;} out.push('<li>'+line.slice(2)+'</li>'); }
-    else { if(inUl){out.push('</ul>');inUl=false;} const t=line.trim(); if(!t) out.push(''); else if(/^<h\d|^<pre|^<blockquote|^<ul|^<\/ul/.test(t)) out.push(line); else out.push('<p>'+line+'</p>'); }
-  }
-  if(inUl) out.push('</ul>');
-  return out.join('');
-}
-
-async function openProject(id) {
-  const p=state.projects.find(x=>x.id===id); if(!p) return;
-  state.modal=p; closeModal(false);
-  const root=$('#modalRoot'); root.replaceChildren();
-  const backdrop=document.createElement('div'); backdrop.className='modal-backdrop'; backdrop.id='modalBackdrop';
-  const modal=document.createElement('div'); modal.className='modal'; modal.setAttribute('role','dialog'); modal.setAttribute('aria-modal','true');
-  const head=document.createElement('div'); head.className='modal-head';
-  const copy=document.createElement('div'); copy.innerHTML=`<div class="modal-kicker">${p.type==='advanced'?'ADVANCED RESEARCH':'FOUNDATION'} / ${escapeHtml(domainFor(p.id)[3])}</div><div class="modal-title">${escapeHtml(p.title)}</div><div class="modal-path">Source path: ${escapeHtml(p.path)}</div>`;
-  const close=document.createElement('button'); close.className='icon-btn'; close.type='button'; close.setAttribute('aria-label','Close dossier'); close.textContent='×';
-  head.append(copy,close);
-  const body=document.createElement('div'); body.className='modal-body'; body.innerHTML='<div class="loading"><div><div class="spinner"></div></div></div>';
-  modal.append(head,body); backdrop.appendChild(modal); root.appendChild(backdrop);
-  close.addEventListener('click',()=>closeModal()); backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
-  document.body.style.overflow='hidden'; close.focus();
-  if(sourceAbort) sourceAbort.abort(); sourceAbort=new AbortController();
-  try {
-    const url=sourceUrlFor(p.path);
-    const timer=setTimeout(()=>sourceAbort.abort(),8000);
-    const r=await fetch(url,{signal:sourceAbort.signal,headers:{Accept:'text/plain'}}); clearTimeout(timer); if(!r.ok) throw new Error(`HTTP ${r.status}`);
-    if(state.modal!==p) return; const md=await r.text();
-    body.innerHTML=`<div class="md-wrap">${markdownToHtml(md)}</div><div class="modal-source"></div>`;
-    const a=document.createElement('a'); a.className='btn'; a.href=githubPathUrl(p.path); a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Open original on GitHub ↗'; $('.modal-source',body).appendChild(a);
-  } catch (err) {
-    if(err.name==='AbortError') return;
-    body.innerHTML=''; const e=document.createElement('div'); e.className='source-error'; e.textContent='The live source document could not be fetched right now. The archive index is still available. '; const a=document.createElement('a'); a.href=REPO;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open GitHub ↗';e.appendChild(a);body.appendChild(e);
-  }
-}
-function closeModal(clear=true) { if(sourceAbort) sourceAbort.abort(); if(clear){$('#modalRoot').replaceChildren(); document.body.style.overflow=''; state.modal=null;} }
-function updateLiveState() {
-  const total=state.projects.length; const adv=state.projects.filter(x=>x.type==='advanced').length; const foundations=state.projects.filter(x=>x.type==='foundation').length;
-  document.documentElement.dataset.projectCount=String(total); document.documentElement.dataset.advancedCount=String(adv); document.documentElement.dataset.foundationCount=String(foundations);
-}
-
-function initReveal() {
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) { $$('.reveal').forEach(el=>el.classList.add('is-visible')); return; }
-  $$('.reveal').forEach((el,i)=>el.style.animationDelay=`${Math.min(i*55,420)}ms`);
-  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target);}}),{threshold:.1,rootMargin:'0px 0px -30px'});
-  $$('.reveal').forEach(el=>io.observe(el));
-  const counters=$$('[data-counter]'); const cio=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return; const el=entry.target, end=Number(el.dataset.counter), start=performance.now(), duration=950; const step=t=>{const p=Math.min(1,(t-start)/duration);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);cio.unobserve(el);}),{threshold:.45}); counters.forEach(c=>cio.observe(c));
-}
-function initInteractions() {
-  const topbar=$('.topbar');
-  const navItems=$$('.navlinks a');
-  const sections=navItems.map(link=>$(link.getAttribute('href'))).filter(Boolean);
-  const syncNavigation=()=>{
-    topbar.classList.toggle('scrolled',scrollY>18);
-    const marker=scrollY+innerHeight*.32;
-    let current=sections[0];
-    sections.forEach(section=>{if(section.offsetTop<=marker) current=section;});
-    navItems.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${current?.id}`));
-  };
-  addEventListener('scroll',syncNavigation,{passive:true});
-  syncNavigation();
-  const search=$('#search'); const focusSearch=$('#focusSearch');
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const doFocus=()=>{location.hash='archive'; setTimeout(()=>search.focus(),120);}; focusSearch.addEventListener('click',doFocus);
-  $('#projectGrid').addEventListener('pointermove',e=>{const card=e.target.closest('.project');if(!card)return;const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',`${e.clientX-r.left}px`);card.style.setProperty('--mouse-y',`${e.clientY-r.top}px`);},{passive:true});
-  const finePointer=window.matchMedia('(pointer:fine)').matches && !reduce;
-  if(finePointer){
-    addEventListener('pointermove',e=>{document.body.style.setProperty('--cursor-x',`${e.clientX}px`);document.body.style.setProperty('--cursor-y',`${e.clientY}px`);},{passive:true});
-    $$('.project,.method-card,.topo-node').forEach(card=>{
-      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateX(${(-y*3).toFixed(2)}deg) rotateY(${(x*3).toFixed(2)}deg) translateY(-5px)`;});
-      card.addEventListener('pointerleave',()=>{card.style.transform='';});
+  <!-- Main JavaScript Logic -->
+  <script>
+  // Mermaid Initialization with Dark Silver Configuration
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      securityLevel: 'loose',
+      themeVariables: {
+        darkMode: true,
+        background: '#07070a',
+        mainBkg: '#121218',
+        textColor: '#ffffff',
+        lineColor: '#a1a1aa',
+        primaryColor: '#181822',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#ffffff',
+        secondaryColor: '#121218',
+        tertiaryColor: '#07070a',
+        nodeBorder: '#ffffff',
+        clusterBkg: '#09090d',
+        clusterBorder: 'rgba(255,255,255,0.25)',
+        edgeLabelBackground: '#09090d'
+      },
+      fontFamily: 'Space Grotesk, sans-serif'
     });
   }
-  search.addEventListener('input',()=>{state.query=search.value;renderProjects();});
-  $('#domainSelect').addEventListener('change',e=>setDomain(e.target.value));
-  $('#sortSelect').addEventListener('change',e=>{state.sort=e.target.value;renderProjects();});
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();doFocus();} });
-  const consoleEl=$('#console');
-  if(!reduce && window.matchMedia('(pointer:fine)').matches) {
-    let tx=0,ty=0,rx=0,ry=0,raf=0;
-    consoleEl.addEventListener('pointermove',e=>{const r=consoleEl.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*4;ty=((e.clientY-r.top)/r.height-.5)*-3; if(!raf)raf=requestAnimationFrame(()=>{rx += (tx-rx)*.18; ry += (ty-ry)*.18; consoleEl.style.transform=`perspective(1000px) rotateX(${ry.toFixed(2)}deg) rotateY(${rx.toFixed(2)}deg)`; raf=0;});});
-    consoleEl.addEventListener('pointerleave',()=>{tx=0;ty=0;});
+
+  const REPO = 'https://github.com/Osxninja/cybersecurity-projects';
+  const RAW = 'https://raw.githubusercontent.com/Osxninja/cybersecurity-projects/main/';
+
+  const DOMAINS = [
+    ['web','01','Web Application Attacks','WEB'],
+    ['network','02','Network Penetration Testing','NETWORK'],
+    ['malware','03','Malware Analysis & Reverse Engineering','MALWARE / RE'],
+    ['iot','04','IoT & Embedded Security','IoT / EMBEDDED'],
+    ['cloud','05','Cloud & Container Security','CLOUD'],
+    ['social','06','Social Engineering & Phishing','HUMAN'],
+    ['crypto','07','Cryptography & Steganography','CRYPTO'],
+    ['mobile','08','Mobile Security','MOBILE'],
+    ['ai','09','AI & ML in Offensive Security','AI SECURITY'],
+    ['dfir','10','Forensics & Incident Response','DFIR'],
+    ['basic','00','Foundational Projects','FOUNDATIONS']
+  ];
+
+  const RANGE = {
+    web:[1,15], network:[16,30], malware:[31,45], iot:[46,58],
+    cloud:[59,70], social:[71,82], crypto:[83,92], mobile:[93,102],
+    ai:[103,113], dfir:[114,125], basic:[126,145]
+  };
+
+  const FALLBACK_NAMES = [
+    "Automated SQL Injection Detection & Prevention System", "XSS Payload Generator with Context-Aware Encoding", "CSRF Token Analyzer & Bypass Framework", "Server-Side Request Forgery (SSRF) Scanner", "API Security Testing Automation Platform", "JWT Token Vulnerability Assessment Tool", "Web Application Firewall (WAF) Bypass Techniques Analyzer", "Broken Access Control Detection Engine", "GraphQL API Security Audit Framework", "WebSocket Security Testing Suite", "Browser Extension Security Analyzer", "Content Security Policy (CSP) Bypass Research Tool", "Race Condition Vulnerability Detector for Web Apps", "Prototype Pollution Attack Detection System", "OAuth 2.0 Flow Vulnerability Scanner", "Automated Network Reconnaissance Framework", "ARP Spoofing Detection & Prevention System", "DNS Tunneling Detection Using ML Classifiers", "Wireless Network WPA3 Security Assessment Tool", "Man-in-the-Middle Attack Detection for TLS-SSL", "Network Traffic Anomaly Detection using Autoencoders", "BGP Hijacking Simulation & Detection Framework", "Port Knocking Authentication System with Stealth Mode", "VPN Tunnel Leak Detection Analyzer", "Active Directory Penetration Testing Automation", "SMB-CIFS Vulnerability Scanner & Exploit Chain Builder", "Zero-Trust Network Architecture Validator", "IPv6 Security Assessment & Attack Simulation Tool", "SDN Controller Security Testing Framework", "Honeypot Deployment & Attack Analysis Platform", "Automated Malware Classification using CNN on PE Headers", "Ransomware Behavior Analysis Sandbox", "Fileless Malware Detection using Memory Forensics", "Dynamic Malware Analysis Platform with API Call Tracing", "Polymorphic Malware Detection using Behavioral Signatures", "Android APK Static Analysis & Vulnerability Scanner", "ELF Binary Exploit Detection for Linux Systems", "Rootkit Detection Framework using System Call Monitoring", "Malware Unpacking & Deobfuscation Automation Tool", "PE File Anomaly Detection using Random Forest", "Macro-based Malware Detector for Office Documents", "Firmware Backdoor Detection System", "Cryptojacking Script Detection in Web Browsers", "Adversarial Example Generator for Evading ML-based IDS", "Living-off-the-Land Binary (LOLBin) Abuse Detector", "IoT Botnet Detection using Network Flow Analysis", "Smart Home Device Vulnerability Assessment Framework", "CAN Bus Intrusion Detection for Connected Vehicles", "MQTT Protocol Security Testing Tool", "Zigbee & Z-Wave Protocol Attack Simulator", "IoT Firmware Extraction & Analysis Pipeline", "BLE Sniffing & MITM Attack Tool", "Industrial SCADA-ICS Security Assessment Platform", "IoT Device Default Credential Scanner", "Smart Grid False Data Injection Attack Simulator", "LoRaWAN Security Audit Framework", "Embedded Device Side-Channel Attack Demonstrator", "OT Network Segmentation Validator", "AWS S3 Bucket Misconfiguration Scanner", "Kubernetes RBAC Misconfiguration Detector", "Docker Container Escape Detection System", "Cloud IAM Policy Over-Privilege Analyzer", "Serverless Function Injection Attack Simulator", "CI-CD Pipeline Security Audit Tool", "Multi-Cloud Security Posture Assessment Framework", "Container Image Vulnerability Scanner Comparison", "Cloud Storage Data Exfiltration Detection System", "Terraform IaC Security Linter & Policy Enforcer", "Azure AD Attack Path Analyzer", "Cloud API Key Leak Detection in Public Repos", "AI-Powered Spear Phishing Email Generator & Tester", "Phishing URL Detection using Deep Learning", "Deepfake Voice Detection for Vishing Prevention", "QR Code Phishing (Quishing) Detection System", "Social Media OSINT Automation Framework", "USB Rubber Ducky Payload Analyzer & Detector", "Email Header Forensics & Spoofing Detection Tool", "Browser-in-the-Browser (BitB) Attack Detection", "Smishing (SMS Phishing) Detection using NLP", "Credential Harvesting Prevention System", "Watering Hole Attack Detection Framework", "Security Awareness Training Gamification Platform", "Image Steganography Detection using CNN", "Post-Quantum Cryptography Implementation Benchmark", "Blockchain-Based Secure Document Verification System", "Homomorphic Encryption Performance Testing Framework", "SSL-TLS Certificate Transparency Monitor", "Password Cracking Optimization using Rainbow Tables & GPU", "Zero-Knowledge Proof Authentication System", "Quantum Key Distribution (QKD) Simulation", "Audio Steganography Detection System", "Secure Multi-Party Computation Protocol Implementation", "Android Malware Detection using Permissions Analysis", "iOS App Binary Analysis & Vulnerability Scanner", "Mobile App API Traffic Interception Framework", "SIM Swapping Attack Detection System", "Mobile Banking App Security Assessment Tool", "Android Intent Hijacking Detection System", "Mobile Device Management (MDM) Bypass Analyzer", "SS7 Diameter Protocol Vulnerability Demonstrator", "Mobile App Repackaging & Tamper Detection", "Progressive Web App (PWA) Security Testing Suite", "Adversarial Machine Learning Attack on IDS-IPS", "GAN-based Malware Sample Generator", "AI-Powered Automated Exploit Generation Framework", "LLM Prompt Injection Attack & Defense Toolkit", "Reinforcement Learning-based Fuzzing Engine", "ML Model Poisoning Attack Simulator", "AI-Driven Vulnerability Prioritization System", "Deepfake Generation & Detection for Red Team Ops", "NLP for Threat Intelligence Extraction", "Federated Learning Security Attack Simulator", "Automated Penetration Testing Agent using LLM", "Disk Forensics Image Analyzer with Timeline Generation", "Memory Dump Analysis Tool for Incident Response", "Network Packet Capture Forensics Dashboard", "Email Phishing Forensics Investigation Platform", "Browser Artifact Extraction & Analysis Tool", "Ransomware Payment Blockchain Tracing System", "SIEM Log Correlation & Alert Prioritization Engine", "Digital Evidence Chain of Custody Blockchain System", "Windows Registry Forensics Automation Tool", "Cloud Instance Forensics Snapshot Analyzer", "Malware C2 Traffic Detector", "Automated Incident Response Playbook Executor", "Simple File Integrity Monitor (FIM) using SHA-256", "Basic Network Port Scanner & Service Banner Grabbing Tool", "Simple ARP Poisoning Detection Script", "Basic Password Strength Checker and Hash Cracker", "Simple Web URL Phishing Detector using Domain Heuristics", "Basic Packet Sniffer and HTTP Header Analyzer", "Simple LSB Image Steganography Encoder & Decoder", "Basic Directory Bruteforce Scanner for Web Servers", "Simple Keylogger Detection & Process Monitoring Tool", "Basic SQL Injection Vulnerability Test Script", "Simple Encrypted Password Manager CLI Tool", "Basic Log File Anomaly Scanner using Regex", "Simple DNS Lookup & Subdomain Finder Tool", "Basic Cross-Site Scripting (XSS) Reflected Scanner", "Simple System Wi-Fi Saved Passwords Extractor", "Basic Encrypted Chat Application using Sockets", "Simple HTTP Security Headers Checker", "Simple Network Ping Sweep and Host Discovery Tool", "Basic USB Drive Auto-Run Infection Prevention Script"
+  ];
+
+  const state = { projects: [], domain: 'all', query: '', sort: 'number', modal: null };
+  let sourceAbort = null;
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const slugNum = n => String(n).padStart(3, '0');
+  const domainFor = n => DOMAINS.find(d => n >= RANGE[d[0]][0] && n <= RANGE[d[0]][1]) || DOMAINS[0];
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+
+  // Generate All 144 Projects with accurate paths
+  function initProjectList() {
+    return FALLBACK_NAMES.map((title, i) => {
+      const id = i < 125 ? i + 1 : 126 + (i - 125);
+      const d = domainFor(id);
+      let path = '';
+      if (id <= 125) {
+        path = `${d[1]} - ${d[2]}/${slugNum(id)} - ${title}.md`;
+      } else {
+        const basicNum = id - 125;
+        path = `basic project/${slugNum(basicNum)} - ${title}.md`;
+      }
+      return {
+        id,
+        title,
+        path,
+        domain: d[0],
+        domainName: d[2],
+        type: id <= 125 ? 'advanced' : 'foundation',
+        summary: id <= 125 
+          ? 'Deep-dive security specification with architectural flowchart, research papers, logic steps, and implementation pipeline.'
+          : 'Practical foundation security project with step-by-step logic flowchart and execution code.'
+      };
+    });
   }
-}
-function initVisuals() {
-  const progress=$('#progress'); const spotlight=$('#spotlight'); let mx=innerWidth*.5,my=innerHeight*.5,sx=mx,sy=my;
-  if(matchMedia('(pointer:fine)').matches) window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;} ,{passive:true});
-  let pRaf=0; const paint=()=>{sx+=(mx-sx)*.15;sy+=(my-sy)*.15; if(spotlight){spotlight.style.left=`${sx}px`;spotlight.style.top=`${sy}px`;} pRaf=requestAnimationFrame(paint);}; if(matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) paint();
-  const scroll=()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max>0?scrollY/max:0})`;}; addEventListener('scroll',scroll,{passive:true});scroll();
 
-  const canvas=$('#bgCanvas'); const ctx=canvas.getContext('2d',{alpha:true}); if(!ctx)return;
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 700px)').matches;
-  if(reduce){canvas.remove();return;}
-  let dpr=Math.min(devicePixelRatio||1,1.35),w=0,h=0,pts=[],raf=0,last=0;
-  const makePoints=()=>Array.from({length:Math.min(34,Math.max(20,Math.floor(innerWidth/34)))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*0.035*dpr,vy:(Math.random()-.5)*0.035*dpr,r:(Math.random()*1.1+.35)*dpr}));
-  const resize=()=>{dpr=Math.min(devicePixelRatio||1,1.35);w=Math.floor(innerWidth*dpr);h=Math.floor(innerHeight*dpr);canvas.width=w;canvas.height=h;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';pts=makePoints();}; resize(); addEventListener('resize',resize,{passive:true});
-  const draw=(t)=>{if(document.hidden){raf=requestAnimationFrame(draw);return;} const dt=Math.min(40,t-last||16); last=t;ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(145,232,255,.42)'; for(const a of pts){a.x+=a.vx*dt;a.y+=a.vy*dt;if(a.x<0||a.x>w)a.vx*=-1;if(a.y<0||a.y>h)a.vy*=-1;ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();} for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,dist2=dx*dx+dy*dy;if(dist2<145*145*dpr*dpr){const alpha=Math.max(0,(1-Math.sqrt(dist2)/(145*dpr)))*.055;ctx.strokeStyle=`rgba(119,133,255,${alpha})`;ctx.lineWidth=.7*dpr;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}} raf=requestAnimationFrame(draw);}; raf=requestAnimationFrame(draw);
-}
-initReveal(); initInteractions(); initVisuals(); loadTree();
+  function renderDomainControls() {
+    const bar = $('#domainBar');
+    bar.replaceChildren();
+    const addChip = (label, value) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.dataset.domain = value;
+      b.textContent = label;
+      b.addEventListener('click', () => setDomain(value));
+      bar.appendChild(b);
+    };
+    addChip('ALL FLOWCHARTS', 'all');
+    DOMAINS.filter(d => d[0] !== 'basic').forEach(d => addChip(d[3], d[0]));
+    addChip('FOUNDATIONS', 'basic');
 
-</script>
-<noscript><div style="position:fixed;left:18px;bottom:18px;z-index:200;background:#0f141d;border:1px solid rgba(255,255,255,.14);color:#aab3c2;padding:10px 12px;border-radius:10px;font:11px ui-monospace,SFMono-Regular,Menlo,monospace">JavaScript is disabled. Core archive links remain available.</div></noscript>
+    const sel = $('#domainSelect');
+    sel.replaceChildren(new Option('All Domains', 'all'));
+    DOMAINS.forEach(d => sel.appendChild(new Option(d[2], d[0])));
+    syncDomainUi();
+  }
+
+  function syncDomainUi() {
+    $('#domainSelect').value = state.domain;
+    $$('#domainBar .chip').forEach(b => b.classList.toggle('active', b.dataset.domain === state.domain));
+  }
+
+  function setDomain(v) {
+    state.domain = v;
+    syncDomainUi();
+    renderProjects();
+  }
+
+  function filtered() {
+    let a = state.projects.filter(p => state.domain === 'all' || p.domain === state.domain);
+    const q = state.query.trim().toLowerCase();
+    if (q) a = a.filter(p => `${p.title} ${p.domainName} ${p.type} ${p.id}`.toLowerCase().includes(q));
+    if (state.sort === 'title') a.sort((x, y) => x.title.localeCompare(y.title));
+    else a.sort((x, y) => x.id - y.id);
+    return a;
+  }
+
+  function renderProjects() {
+    const grid = $('#projectGrid');
+    const arr = filtered();
+    $('#resultCount').textContent = `${arr.length} ${arr.length === 1 ? 'PROJECT' : 'PROJECTS'} // FLOWCHARTS ENABLED`;
+    grid.replaceChildren();
+    if (!arr.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = 'No matching research flowcharts in this slice of the archive.';
+      grid.appendChild(empty);
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    arr.forEach(p => {
+      const card = projectCard(p);
+      frag.appendChild(card);
+    });
+    grid.appendChild(frag);
+    attachCardInteractions();
+  }
+
+  function projectCard(p) {
+    const el = document.createElement('article');
+    el.className = 'project';
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    const num = p.type === 'advanced' ? `PROJECT ${slugNum(p.id)}` : `FOUNDATION ${String(p.id - 125).padStart(2, '0')}`;
+    const typeLabel = p.type === 'advanced' 
+      ? '<span style="color: var(--red-neon); font-weight: 700;">[ADVANCED]</span>' 
+      : '<span style="color: var(--green-neon); font-weight: 700;">[FOUNDATION]</span>';
+    el.innerHTML = `
+      <div class="project-top">
+        <span class="project-num">${escapeHtml(num)}</span>
+        <span class="project-domain">${escapeHtml(domainFor(p.id)[3])}</span>
+      </div>
+      <h3>${escapeHtml(p.title)}</h3>
+      <p>${escapeHtml(p.summary)}</p>
+      <div class="project-foot">
+        <span>${typeLabel}</span>
+        <span class="action-badge">VIEW FLOWCHART &rarr;</span>
+      </div>
+    `;
+    const open = () => openProject(p.id);
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
+    return el;
+  }
+
+  function attachCardInteractions() {
+    $$('.project').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+      }, { passive: true });
+    });
+  }
+
+  // =========================================================================
+  // CODE-TO-FLOWCHART ENGINE: Safe parsing & Conversion (No Emojis)
+  // =========================================================================
+  function generateFlowchartFromCode(code, lang = 'code') {
+    const clean = code.trim();
+    const lines = clean.split('\n');
+
+    let functions = [];
+    let conditions = [];
+    let actions = [];
+    let outputs = [];
+
+    lines.forEach(line => {
+      const t = line.trim();
+      if (/^(def|function|async function|class|void|int|public)\s+([a-zA-Z0-9_]+)/.test(t)) {
+        const match = t.match(/^(def|function|async function|class|void|int|public)\s+([a-zA-Z0-9_]+)/);
+        if (match) functions.push(match[2]);
+      }
+      if (/^(if|elif|else if|switch|case|while|for)\b/.test(t)) {
+        conditions.push(t.slice(0, 45));
+      }
+      if (/(\.send\(|\.execute\(|\.connect\(|\.write\(|\.dump\(|requests\.|socket\.|hashlib\.|subprocess\.)/.test(t)) {
+        actions.push(t.slice(0, 45));
+      }
+      if (/^(return|print\(|console\.log|sys\.exit|alert\(|logger\.)/.test(t)) {
+        outputs.push(t.slice(0, 45));
+      }
+    });
+
+    const fName = functions[0] || 'ExecutionRoutine';
+    const mainAction = actions[0] || 'Execute Core Security Logic';
+    const condCheck = conditions[0] || 'Validate Input & Condition Check';
+    const outAction = outputs[0] || 'Return Payload / Security Alert / Result';
+
+    return `
+      <div class="visual-flowchart-grid">
+        <div class="v-node">
+          <div class="v-node-icon" style="font-size: 11px; font-weight: 700; color: var(--cyan-neon);">[IN]</div>
+          <div class="v-node-content">
+            <b>1. Entry Point & Payload Input</b>
+            <span>Parameters ingested into <code>${escapeHtml(fName)}()</code></span>
+          </div>
+          <span class="v-node-tag">ENTRY</span>
+        </div>
+
+        <div class="v-connector-line">↓</div>
+
+        <div class="v-node">
+          <div class="v-node-icon" style="font-size: 11px; font-weight: 700; color: var(--cyan-neon);">[RUN]</div>
+          <div class="v-node-content">
+            <b>2. Data Transformation & Processing</b>
+            <span>${escapeHtml(mainAction)}</span>
+          </div>
+          <span class="v-node-tag">PROCESS</span>
+        </div>
+
+        <div class="v-connector-line">↓</div>
+
+        <div class="v-node v-decision">
+          <div class="v-node-icon" style="font-size: 11px; font-weight: 700; color: var(--green-neon);">[IF]</div>
+          <div class="v-node-content">
+            <b>3. Security Decision Diamond</b>
+            <span>Condition: <code>${escapeHtml(condCheck)}</code></span>
+          </div>
+          <span class="v-node-tag">DECISION</span>
+        </div>
+
+        <div class="v-connector-line">↓</div>
+
+        <div class="v-branch-row">
+          <div class="v-branch-card danger">
+            <b>[BRANCH A: TRIGGER / ANOMALY]</b>
+            <p>If mismatch, exploit payload detected, or threshold exceeded &rarr; Trigger alert & isolate.</p>
+          </div>
+          <div class="v-branch-card safe">
+            <b>[BRANCH B: VERIFIED / PROCEED]</b>
+            <p>If input passes validation &rarr; Safe sanitized execution & state persistence.</p>
+          </div>
+        </div>
+
+        <div class="v-connector-line">↓</div>
+
+        <div class="v-node">
+          <div class="v-node-icon" style="font-size: 11px; font-weight: 700; color: var(--cyan-neon);">[OUT]</div>
+          <div class="v-node-content">
+            <b>4. Output & Logging Response</b>
+            <span>${escapeHtml(outAction)}</span>
+          </div>
+          <span class="v-node-tag">OUTPUT</span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Fallback Clean SVG Flowchart generator when mermaid syntax is non-standard (No Emojis)
+  function generateFallbackMermaidSvg(raw) {
+    const lines = raw.split('\n').filter(l => l.includes('-->') || l.includes('->') || l.includes('['));
+    const nodes = [];
+    lines.forEach((l) => {
+      const match = l.match(/\["?(.*?)"?\]/) || l.match(/{"?(.*?)"?}/) || l.match(/([a-zA-Z0-9_-]+)/);
+      if (match && match[1] && match[1].trim()) {
+        nodes.push(match[1].replace(/["{}[\]]/g, '').trim());
+      }
+    });
+
+    const displayNodes = nodes.length >= 2 ? nodes.slice(0, 6) : ['Client Request / Payload Ingestion', 'Security Verification & AST Analysis', 'Action Execution / SIEM Alerting'];
+    
+    let html = '<div class="visual-flowchart-grid">';
+    displayNodes.forEach((nodeText, idx) => {
+      const isEnd = idx === displayNodes.length - 1;
+      const tagLabel = idx === 0 ? 'START' : isEnd ? 'END' : 'STAGE';
+      const iconText = idx === 0 ? '01' : isEnd ? 'END' : String(idx + 1).padStart(2, '0');
+      const iconColor = isEnd ? 'var(--green-neon)' : 'var(--cyan-neon)';
+      html += `
+        <div class="v-node ${idx % 2 === 1 ? 'v-decision' : ''}">
+          <div class="v-node-icon" style="font-size: 11px; font-weight: 700; color: ${iconColor};">[${iconText}]</div>
+          <div class="v-node-content">
+            <b>Step ${idx + 1}: ${escapeHtml(nodeText)}</b>
+            <span>Architecture flow pipeline stage</span>
+          </div>
+          <span class="v-node-tag">${tagLabel}</span>
+        </div>
+      `;
+      if (idx < displayNodes.length - 1) {
+        html += '<div class="v-connector-line">↓</div>';
+      }
+    });
+    html += '</div>';
+    return html;
+  }
+
+  // Clean inline markdown inside table cells & snippets
+  function cleanInlineMarkdown(text) {
+    if (!text) return '';
+    let str = String(text).trim();
+    // Escape HTML first
+    str = escapeHtml(str);
+    // Restore markdown bold, italics, code, links
+    str = str.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    str = str.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    str = str.replace(/`([^`]+)`/g, '<code>$1</code>');
+    str = str.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    return str;
+  }
+
+  // Assign distinct luxury silver/monochrome badge classes based on publication venue
+  function getBadgeClassForSource(sourceStr) {
+    const s = String(sourceStr).toUpperCase();
+    if (s.includes('IEEE')) return 'badge-ieee';
+    if (s.includes('ACM')) return 'badge-acm';
+    if (s.includes('USENIX')) return 'badge-usenix';
+    if (s.includes('NDSS')) return 'badge-ndss';
+    if (s.includes('ARXIV')) return 'badge-arxiv';
+    if (s.includes('BLACK HAT') || s.includes('DEF CON')) return 'badge-blackhat';
+    if (s.includes('SPRINGER') || s.includes('ELSEVIER')) return 'badge-springer';
+    return '';
+  }
+
+  // Parse Markdown Tables into Research Papers Showcase Cards or Glass Tables (No Emojis)
+  function parseMarkdownTables(text) {
+    const tableRegex = /((?:\|[^\n]+\|\r?\n?)+)/g;
+    return text.replace(tableRegex, (match) => {
+      const lines = match.trim().split('\n').map(l => l.trim()).filter(Boolean);
+      if (lines.length < 2) return match;
+      if (!lines[1].includes('---')) return match;
+
+      const parseRow = row => row.split('|').slice(1, -1).map(c => c.trim());
+      const rawHeaders = parseRow(lines[0]);
+      const rawRows = lines.slice(2).map(parseRow);
+
+      const numIdx = rawHeaders.findIndex(h => /^#|no\.?|index|num/i.test(h));
+      const titleIdx = rawHeaders.findIndex(h => /paper|title/i.test(h) && !/source|venue|contrib|insight/i.test(h));
+      const authorIdx = rawHeaders.findIndex(h => /author/i.test(h));
+      const yearIdx = rawHeaders.findIndex(h => /year|date/i.test(h));
+      const sourceIdx = rawHeaders.findIndex(h => /source|venue|journal|conference|publisher/i.test(h));
+      const contribIdx = rawHeaders.findIndex(h => /contrib|insight|takeaway|summary|finding|result/i.test(h));
+
+      const isPapersTable = titleIdx !== -1 || rawHeaders.some(h => /paper|author|contribution|source/i.test(h));
+
+      if (isPapersTable) {
+        let cardsHtml = '<div class="papers-card-grid">';
+        rawRows.forEach((row, i) => {
+          let num = numIdx >= 0 && row[numIdx] ? row[numIdx] : String(i + 1);
+          num = num.replace(/^[#\s]+/, '') || String(i + 1);
+
+          let title = titleIdx >= 0 && row[titleIdx] ? row[titleIdx] : (numIdx === -1 && row[0] ? row[0] : `Research Paper #${num}`);
+          let authors = authorIdx >= 0 && row[authorIdx] ? row[authorIdx] : (numIdx === -1 && row[1] ? row[1] : '');
+          let year = yearIdx >= 0 && row[yearIdx] ? row[yearIdx] : (numIdx === -1 && row[2] ? row[2] : '');
+          let source = sourceIdx >= 0 && row[sourceIdx] ? row[sourceIdx] : (numIdx === -1 && row[3] ? row[3] : '');
+          let contrib = contribIdx >= 0 && row[contribIdx] ? row[contribIdx] : (row[row.length - 1] || '');
+
+          const badgeClass = getBadgeClassForSource(source);
+
+          cardsHtml += `
+            <div class="paper-card">
+              <div class="paper-card-top">
+                <span class="paper-num">PAPER #${escapeHtml(num)}</span>
+                ${year ? `<span class="paper-badge year">YEAR: ${cleanInlineMarkdown(year)}</span>` : ''}
+                ${source ? `<span class="paper-badge source ${badgeClass}">${cleanInlineMarkdown(source)}</span>` : ''}
+              </div>
+              <div class="paper-title">${cleanInlineMarkdown(title)}</div>
+              ${authors ? `<div class="paper-authors"><span style="color: var(--cyan-neon); font-weight: 700;">[AUTHORS]:</span> ${cleanInlineMarkdown(authors)}</div>` : ''}
+              ${contrib ? `
+                <div class="paper-contrib">
+                  <div class="paper-contrib-label">KEY CONTRIBUTION &amp; INSIGHT</div>
+                  <div class="paper-contrib-text">${cleanInlineMarkdown(contrib)}</div>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        cardsHtml += '</div>';
+        return `<div class="papers-section-wrapper">${cardsHtml}</div>`;
+      }
+
+      // Standard Table
+      let tableHtml = '<div class="table-responsive"><table class="glass-table"><thead><tr>';
+      rawHeaders.forEach(h => {
+        tableHtml += `<th>${cleanInlineMarkdown(h)}</th>`;
+      });
+      tableHtml += '</tr></thead><tbody>';
+      rawRows.forEach(r => {
+        tableHtml += '<tr>';
+        r.forEach(cell => {
+          tableHtml += `<td>${cleanInlineMarkdown(cell)}</td>`;
+        });
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table></div>';
+      return tableHtml;
+    });
+  }
+
+  // Full-featured Markdown Parser with Alert Callouts, Tables & Flowchart protection (No Emojis)
+  let fcCounter = 0;
+  let pendingMermaid = [];
+
+  function markdownToHtml(md) {
+    fcCounter = 0;
+    pendingMermaid = [];
+
+    // 1. Extract code blocks first to protect them from HTML formatting
+    const codeBlocks = [];
+    let processed = md.replace(/^---[\s\S]*?---\s*/, '');
+
+    processed = processed.replace(/```([\w-]*)\n?([\s\S]*?)```/g, (match, lang, code) => {
+      const id = codeBlocks.length;
+      codeBlocks.push({ lang: lang.trim().toLowerCase(), code });
+      return `###CODE_BLOCK_${id}###`;
+    });
+
+    // 2. Parse Markdown Tables into Research Paper Cards or Glass Tables
+    processed = parseMarkdownTables(processed);
+
+    // 3. Parse GitHub Alert Callouts: > [!CAUTION] ... or > [!NOTE] ...
+    processed = processed.replace(/^>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)$/gim, (m, type, title) => {
+      const isDanger = type === 'CAUTION' || type === 'WARNING';
+      const cls = isDanger ? 'alert-callout alert-danger' : 'alert-callout alert-success';
+      return `<div class="${cls}"><div class="alert-callout-title">[${type.toUpperCase()}]: ${escapeHtml(title || 'Security Context')}</div>`;
+    });
+
+    // 4. Escape remaining raw text
+    let s = processed;
+
+    // Headers & Basic text styling
+    s = s.replace(/^###### (.*)$/gm, '<h6>$1</h6>')
+         .replace(/^##### (.*)$/gm, '<h5>$1</h5>')
+         .replace(/^#### (.*)$/gm, '<h4>$1</h4>')
+         .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+         .replace(/^## (.*)$/gm, (m, h) => {
+           if (/papers\s+i\s+actually\s+read|papers\s+i'm\s+referencing|research\s+papers|academic\s+papers|references/i.test(h)) {
+             return `<div class="papers-header-badge"><div class="papers-kicker">[ACADEMIC RESEARCH LITERATURE]</div><h2 class="papers-title">${escapeHtml(h)}</h2><p class="papers-sub">Foundational security papers, cryptographic literature, and peer-reviewed citations referenced in this research project.</p></div>`;
+           }
+           return `<h2>${escapeHtml(h)}</h2>`;
+         })
+         .replace(/^# (.*)$/gm, '<h1>$1</h1>');
+
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    s = s.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');
+    s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Clean wikilinks: [[Drawing...|Title]] or [[Title]]
+    s = s.replace(/\[\[(?:[^|\]]*\|)?([^\]]+)\]\]/g, '<span class="paper-badge source">$1</span>');
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${text}</a>`);
+
+    // 5. Restore Code & Mermaid Blocks
+    s = s.replace(/###CODE_BLOCK_(\d+)###/g, (match, idx) => {
+      const block = codeBlocks[Number(idx)];
+      if (!block) return '';
+
+      fcCounter++;
+      const currentId = `fc_${fcCounter}`;
+      const rawCode = block.code.trim();
+
+      if (block.lang === 'mermaid') {
+        pendingMermaid.push({ id: currentId, code: rawCode });
+        return `
+          <div class="flowchart-container" id="container_${currentId}">
+            <div class="flowchart-header">
+              <span class="flowchart-title">[ARCHITECTURE FLOWCHART]</span>
+              <div class="flowchart-tabs">
+                <button type="button" class="fc-tab-btn active" onclick="switchFcTab('${currentId}', 'flow')">Flowchart</button>
+                <button type="button" class="fc-tab-btn" onclick="switchFcTab('${currentId}', 'code')">Graph Code</button>
+              </div>
+            </div>
+            <div class="flowchart-view-area" id="view_flow_${currentId}">
+              <div class="mermaid-target" id="mermaid_target_${currentId}">
+                <!-- Mermaid SVG rendered safely via JS -->
+              </div>
+            </div>
+            <div class="raw-code-view-area" id="view_code_${currentId}">
+              <pre><code>${escapeHtml(rawCode)}</code></pre>
+            </div>
+          </div>
+        `;
+      }
+
+      // Standard code block -> Flowchart View
+      const flowchartHtml = generateFlowchartFromCode(rawCode, block.lang);
+      return `
+        <div class="flowchart-container" id="container_${currentId}">
+          <div class="flowchart-header">
+            <span class="flowchart-title">[LOGIC FLOWCHART &amp; PIPELINE] (${escapeHtml(block.lang.toUpperCase() || 'CODE')})</span>
+            <div class="flowchart-tabs">
+              <button type="button" class="fc-tab-btn active" onclick="switchFcTab('${currentId}', 'flow')">Flowchart View</button>
+              <button type="button" class="fc-tab-btn" onclick="switchFcTab('${currentId}', 'code')">Source Code</button>
+            </div>
+          </div>
+          <div class="flowchart-view-area" id="view_flow_${currentId}">
+            ${flowchartHtml}
+          </div>
+          <div class="raw-code-view-area" id="view_code_${currentId}">
+            <pre><code>${escapeHtml(rawCode)}</code></pre>
+          </div>
+        </div>
+      `;
+    });
+
+    const lines = s.split('\n');
+    const out = [];
+    let inUl = false;
+    for (const line of lines) {
+      if (/^[-*] /.test(line)) {
+        if (!inUl) { out.push('<ul>'); inUl = true; }
+        out.push('<li>' + line.slice(2) + '</li>');
+      } else {
+        if (inUl) { out.push('</ul>'); inUl = false; }
+        const t = line.trim();
+        if (!t) out.push('');
+        else if (/^<h\d|^<pre|^<blockquote|^<ul|^<\/ul|^<div|^<\/div|^<table|^<\/table/.test(t)) out.push(line);
+        else out.push('<p>' + line + '</p>');
+      }
+    }
+    if (inUl) out.push('</ul>');
+    return out.join('');
+  }
+
+  // Safe Mermaid Renderer
+  async function renderPendingMermaid() {
+    for (const item of pendingMermaid) {
+      const target = document.getElementById(`mermaid_target_${item.id}`);
+      if (!target) continue;
+
+      try {
+        if (typeof mermaid !== 'undefined') {
+          let cleanCode = item.code.trim();
+          const renderId = `m_svg_${item.id}_${Math.floor(Math.random()*1000)}`;
+          const { svg } = await mermaid.render(renderId, cleanCode);
+          target.innerHTML = svg;
+        } else {
+          target.innerHTML = generateFallbackMermaidSvg(item.code);
+        }
+      } catch (err) {
+        const errElement = document.getElementById('d' + `m_svg_${item.id}`);
+        if (errElement) errElement.remove();
+        target.innerHTML = generateFallbackMermaidSvg(item.code);
+      }
+    }
+    pendingMermaid = [];
+  }
+
+  // Tab Switcher
+  window.switchFcTab = function(id, tab) {
+    const container = document.getElementById(`container_${id}`);
+    if (!container) return;
+    const btnFlow = container.querySelector('.fc-tab-btn:first-child');
+    const btnCode = container.querySelector('.fc-tab-btn:last-child');
+    const viewFlow = document.getElementById(`view_flow_${id}`);
+    const viewCode = document.getElementById(`view_code_${id}`);
+
+    if (tab === 'flow') {
+      btnFlow.classList.add('active');
+      btnCode.classList.remove('active');
+      if (viewFlow) viewFlow.style.display = 'flex';
+      if (viewCode) viewCode.style.display = 'none';
+    } else {
+      btnFlow.classList.remove('active');
+      btnCode.classList.add('active');
+      if (viewFlow) viewFlow.style.display = 'none';
+      if (viewCode) viewCode.style.display = 'block';
+    }
+  };
+
+  async function openProject(id) {
+    const p = state.projects.find(x => x.id === id);
+    if (!p) return;
+    state.modal = p;
+    closeModal(false);
+
+    const root = $('#modalRoot');
+    root.replaceChildren();
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop';
+    backdrop.id = 'modalBackdrop';
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+
+    const head = document.createElement('div');
+    head.className = 'modal-head';
+
+    const copy = document.createElement('div');
+    copy.innerHTML = `
+      <div class="modal-kicker">${p.type === 'advanced' ? '[ADVANCED RESEARCH]' : '[FOUNDATION]'} / ${escapeHtml(domainFor(p.id)[3])}</div>
+      <div class="modal-title">${escapeHtml(p.title)}</div>
+      <div class="modal-path">Specification file: ${escapeHtml(p.path)}</div>
+    `;
+
+    const close = document.createElement('button');
+    close.className = 'icon-btn';
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close dossier');
+    close.textContent = '×';
+
+    head.append(copy, close);
+
+    const body = document.createElement('div');
+    body.className = 'modal-body';
+    body.innerHTML = '<div style="padding: 60px; text-align: center; color: var(--silver-300); font-family: JetBrains Mono, monospace;"><div style="font-size: 14px; font-weight: 700; color: var(--cyan-neon); margin-bottom: 12px; letter-spacing: 0.14em;">[INITIALIZING DOSSIER &amp; FLOWCHARTS]</div> Compiling Research Flowcharts &amp; Papers...</div>';
+
+    modal.append(head, body);
+    backdrop.appendChild(modal);
+    root.appendChild(backdrop);
+
+    close.addEventListener('click', () => closeModal());
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+
+    if (sourceAbort) sourceAbort.abort();
+    sourceAbort = new AbortController();
+
+    let mdText = null;
+
+    // 1. Local fetch
+    try {
+      const localUrl = '/' + p.path.split('/').map(encodeURIComponent).join('/');
+      const r = await fetch(localUrl, { signal: sourceAbort.signal });
+      if (r.ok) {
+        mdText = await r.text();
+      }
+    } catch (e) { /* ignore */ }
+
+    // 2. Raw GitHub fetch
+    if (!mdText) {
+      try {
+        const rawUrl = RAW + p.path.split('/').map(encodeURIComponent).join('/');
+        const r = await fetch(rawUrl, { signal: sourceAbort.signal });
+        if (r.ok) {
+          mdText = await r.text();
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    if (state.modal !== p) return;
+
+    if (mdText) {
+      body.innerHTML = `<div class="md-wrap">${markdownToHtml(mdText)}</div>`;
+      await renderPendingMermaid();
+    } else {
+      const sampleCode = `# ${p.title} Logic Routine\nimport os\nimport sys\n\ndef execute_audit():\n    target = get_target()\n    payload = generate_vector(target)\n    if verify_vulnerability(payload):\n        log_alert("Vulnerability verified", target)\n        return True\n    return False`;
+      body.innerHTML = `
+        <div class="md-wrap">
+          <h2>${escapeHtml(p.title)}</h2>
+          <blockquote><strong>Research Overview:</strong> ${escapeHtml(p.summary)}</blockquote>
+          <h3>Automated Execution Flowchart</h3>
+          ${markdownToHtml('```python\n' + sampleCode + '\n```')}
+          <div style="margin-top: 30px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,0.03); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--silver-300);">Source Repository Specification</span>
+            <a class="btn" href="${REPO}/blob/main/${p.path.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener noreferrer">View Original on GitHub ↗</a>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  function closeModal(clear = true) {
+    if (sourceAbort) sourceAbort.abort();
+    if (clear) {
+      $('#modalRoot').replaceChildren();
+      document.body.style.overflow = '';
+      state.modal = null;
+    }
+  }
+
+  // =========================================================================
+  // DIRECT README DOSSIER VIEWER
+  // =========================================================================
+  async function openReadmeDossier() {
+    closeModal(false);
+    const root = $('#modalRoot');
+    root.replaceChildren();
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop';
+    backdrop.id = 'modalBackdrop';
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+
+    const head = document.createElement('div');
+    head.className = 'modal-head';
+
+    const copy = document.createElement('div');
+    copy.innerHTML = `
+      <div class="modal-kicker">[CENTRAL RESEARCH SPECIFICATION] / HIDDEN EYE ARCHIVE</div>
+      <div class="modal-title">README.md // Full Research Dossier</div>
+      <div class="modal-path">Direct File Access: README.md</div>
+    `;
+
+    const close = document.createElement('button');
+    close.className = 'icon-btn';
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close dossier');
+    close.textContent = '×';
+
+    head.append(copy, close);
+
+    const body = document.createElement('div');
+    body.className = 'modal-body';
+    body.innerHTML = '<div style="padding: 60px; text-align: center; color: var(--silver-300); font-family: JetBrains Mono, monospace;"><div style="font-size: 14px; font-weight: 700; color: var(--cyan-neon); margin-bottom: 12px; letter-spacing: 0.14em;">[FETCHING README SPECIFICATION]</div> Compiling Research Domains &amp; Documentation...</div>';
+
+    modal.append(head, body);
+    backdrop.appendChild(modal);
+    root.appendChild(backdrop);
+
+    close.addEventListener('click', () => closeModal());
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.body.style.overflow = 'hidden';
+    close.focus();
+
+    if (sourceAbort) sourceAbort.abort();
+    sourceAbort = new AbortController();
+
+    let readmeText = null;
+    try {
+      const r = await fetch('/README.md', { signal: sourceAbort.signal });
+      if (r.ok) readmeText = await r.text();
+    } catch(e) {}
+
+    if (!readmeText) {
+      try {
+        const r2 = await fetch(RAW + 'README.md', { signal: sourceAbort.signal });
+        if (r2.ok) readmeText = await r2.text();
+      } catch(e) {}
+    }
+
+    if (readmeText) {
+      body.innerHTML = `<div class="md-wrap">${markdownToHtml(readmeText)}</div>`;
+      await renderPendingMermaid();
+    } else {
+      body.innerHTML = `
+        <div class="md-wrap">
+          <h2>Hidden Eye Security Documentation</h2>
+          <p>Comprehensive cybersecurity repository documentation and research specifications.</p>
+          <a class="btn" href="${REPO}" target="_blank" rel="noopener noreferrer">View Original Repository on GitHub ↗</a>
+        </div>
+      `;
+    }
+  }
+
+  // =========================================================================
+  // VOICE SYNTHESIS: "Welcome to Hidden Eye"
+  // =========================================================================
+  let voicePlayed = false;
+  function playVoiceGreeting() {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance("Welcome to Hidden Eye");
+      utterance.rate = 0.94;
+      utterance.pitch = 0.88;
+      utterance.volume = 1.0;
+
+      const setVoiceAndSpeak = () => {
+        const voices = window.speechSynthesis.getVoices();
+        if (voices && voices.length > 0) {
+          const cyberVoice = voices.find(v => (v.name.includes('David') || v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('English') || v.lang.startsWith('en')) && !v.name.includes('Zira'));
+          if (cyberVoice) utterance.voice = cyberVoice;
+        }
+        window.speechSynthesis.speak(utterance);
+        voicePlayed = true;
+      };
+
+      if (window.speechSynthesis.getVoices().length > 0) {
+        setVoiceAndSpeak();
+      } else {
+        window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+      }
+    } catch(err) {
+      console.warn('Voice synthesis:', err);
+    }
+  }
+
+  function initVoiceGreeting() {
+    // Attempt automatic speech on load
+    setTimeout(playVoiceGreeting, 600);
+
+    // Fallback on first user interaction if browser policy blocks autoplay speech
+    const triggerOnFirstInteraction = () => {
+      if (!voicePlayed) {
+        playVoiceGreeting();
+      }
+      window.removeEventListener('pointerdown', triggerOnFirstInteraction);
+      window.removeEventListener('keydown', triggerOnFirstInteraction);
+      window.removeEventListener('scroll', triggerOnFirstInteraction);
+    };
+
+    window.addEventListener('pointerdown', triggerOnFirstInteraction, { passive: true, once: true });
+    window.addEventListener('keydown', triggerOnFirstInteraction, { passive: true, once: true });
+    window.addEventListener('scroll', triggerOnFirstInteraction, { passive: true, once: true });
+  }
+
+  // Counters
+  function initCounters() {
+    const counters = $$('[data-counter]');
+    counters.forEach(el => {
+      const end = Number(el.dataset.counter);
+      let current = 0;
+      const step = () => {
+        current += Math.ceil(end / 20);
+        if (current >= end) {
+          el.textContent = end;
+        } else {
+          el.textContent = current;
+          requestAnimationFrame(step);
+        }
+      };
+      step();
+    });
+  }
+
+  // Interactions
+  function initInteractions() {
+    const topbar = $('.topbar');
+    const navItems = $$('.navlinks a');
+    const sections = navItems.map(link => $(link.getAttribute('href'))).filter(Boolean);
+
+    const syncNavigation = () => {
+      topbar.classList.toggle('scrolled', scrollY > 18);
+      const marker = scrollY + innerHeight * 0.32;
+      let current = sections[0];
+      sections.forEach(section => { if (section.offsetTop <= marker) current = section; });
+      navItems.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current?.id}`));
+    };
+    addEventListener('scroll', syncNavigation, { passive: true });
+    syncNavigation();
+
+    const search = $('#search');
+    const focusSearch = $('#focusSearch');
+    const doFocus = () => {
+      location.hash = 'archive';
+      setTimeout(() => search.focus(), 120);
+    };
+    if (focusSearch) focusSearch.addEventListener('click', doFocus);
+
+    search.addEventListener('input', () => {
+      state.query = search.value;
+      renderProjects();
+    });
+
+    $('#domainSelect').addEventListener('change', e => setDomain(e.target.value));
+    $('#sortSelect').addEventListener('change', e => {
+      state.sort = e.target.value;
+      renderProjects();
+    });
+
+    // README Direct Access Buttons
+    const topReadmeBtn = $('#topReadmeBtn');
+    if (topReadmeBtn) topReadmeBtn.addEventListener('click', openReadmeDossier);
+
+    const heroReadmeBtn = $('#heroReadmeBtn');
+    if (heroReadmeBtn) heroReadmeBtn.addEventListener('click', openReadmeDossier);
+
+    // Voice Replay Buttons
+    const voiceToggleBtn = $('#voiceToggleBtn');
+    if (voiceToggleBtn) voiceToggleBtn.addEventListener('click', playVoiceGreeting);
+
+    const voiceStatusBadge = $('#voiceStatusBadge');
+    if (voiceStatusBadge) voiceStatusBadge.addEventListener('click', playVoiceGreeting);
+
+    const video = $('#bgVideo');
+    const toggleVideoBtn = $('#toggleVideoBtn');
+    if (toggleVideoBtn && video) {
+      toggleVideoBtn.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          toggleVideoBtn.innerHTML = '<span>[VIDEO: ON]</span>';
+          video.style.opacity = '0.74';
+        } else {
+          video.pause();
+          toggleVideoBtn.innerHTML = '<span>[VIDEO: OFF]</span>';
+          video.style.opacity = '0.12';
+        }
+      });
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        doFocus();
+      }
+    });
+  }
+
+  // Silver Starfield / Network Canvas Background
+  function initVisuals() {
+    const progress = $('#progress');
+    const spotlight = $('#spotlight');
+    let mx = innerWidth * 0.5, my = innerHeight * 0.5, sx = mx, sy = my;
+
+    if (matchMedia('(pointer:fine)').matches) {
+      window.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    }
+
+    const paint = () => {
+      sx += (mx - sx) * 0.15;
+      sy += (my - sy) * 0.15;
+      if (spotlight) {
+        spotlight.style.left = `${sx}px`;
+        spotlight.style.top = `${sy}px`;
+      }
+      requestAnimationFrame(paint);
+    };
+    if (matchMedia('(pointer:fine)').matches) paint();
+
+    const scroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    };
+    addEventListener('scroll', scroll, { passive: true });
+    scroll();
+
+    const canvas = $('#bgCanvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let dpr = Math.min(devicePixelRatio || 1, 1.35), w = 0, h = 0, pts = [];
+    const makePoints = () => Array.from({ length: Math.min(36, Math.max(22, Math.floor(innerWidth / 38))) }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.04 * dpr,
+      vy: (Math.random() - 0.5) * 0.04 * dpr,
+      r: (Math.random() * 1.2 + 0.4) * dpr
+    }));
+
+    const resize = () => {
+      dpr = Math.min(devicePixelRatio || 1, 1.35);
+      w = Math.floor(innerWidth * dpr);
+      h = Math.floor(innerHeight * dpr);
+      canvas.width = w;
+      canvas.height = h;
+      canvas.style.width = innerWidth + 'px';
+      canvas.style.height = innerHeight + 'px';
+      pts = makePoints();
+    };
+    resize();
+    addEventListener('resize', resize, { passive: true });
+
+    let last = 0;
+    const draw = t => {
+      if (document.hidden) { requestAnimationFrame(draw); return; }
+      const dt = Math.min(40, t - last || 16);
+      last = t;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(0, 240, 255, 0.75)';
+      for (const a of pts) {
+        a.x += a.vx * dt; a.y += a.vy * dt;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const a = pts[i], b = pts[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist2 = dx * dx + dy * dy;
+          if (dist2 < 140 * 140 * dpr * dpr) {
+            const alpha = Math.max(0, (1 - Math.sqrt(dist2) / (140 * dpr))) * 0.12;
+            ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+            ctx.lineWidth = 0.8 * dpr;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    };
+    requestAnimationFrame(draw);
+  }
+
+  // Initial Boot
+  state.projects = initProjectList();
+  renderDomainControls();
+  renderProjects();
+  initCounters();
+  initInteractions();
+  initVisuals();
+  initVoiceGreeting();
+  </script>
 </body>
 </html>
